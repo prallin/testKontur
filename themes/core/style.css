@@ -1,0 +1,20 @@
+/**
+ * 	Description: core them for lydia
+ */
+
+/**
+ * 	Structure
+ */
+html{}
+body{
+	background-color: #eee;
+	font: 1em Verdana, Geneva, Arial, Helvetica, sans-serif
+}
+#header,
+#main,
+#footer {
+	margin:0 auto;
+	width: 970px;
+	background-color: #fff;
+	padding: 1em;
+}
