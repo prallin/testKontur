@@ -126,6 +126,25 @@ body {
     color: white;
     padding: 0px 10px 10px 0px;
 }
+.debug {
+	background-color:#FF7F50;
+	border:1px solid #444444;
+	margin-bottom:1em;
+	padding:1em;
+}
+.entries {
+	background-color:#FFFACD;
+	border:1px solid #444444;
+	margin-bottom:1em;
+	padding:1em;
+	
+}
+.info, .success, .notice{
+	background-color:#95D0F4;
+	border:1px solid #444444;
+	margin-top:1em;
+	padding:1em;
+}
 
 /* ====================
     Menu

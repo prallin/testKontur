@@ -32,13 +32,15 @@
         <div class="header-container">
             <header class="wrapper clearfix">
             	<?=$header?>
+            	<?=$menu?>
             </header>
         </div>
-
         <div class="main-container">
             <div class="main wrapper clearfix">
-            	<?=$main?>
-             	<?=get_debug()?> 
+            	<?=get_messages_from_session()?>
+            	<?=@$main?>
+            	<?=render_views()?>
+             	<div class="debug"><?=get_debug()?></div>
              </div> <!-- #main -->
         </div> <!-- #main-container -->
 
@@ -58,7 +60,7 @@
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            var _gaq=[['_setAccount','UA-34999928-2'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));

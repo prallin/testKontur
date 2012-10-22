@@ -6,32 +6,23 @@
 /**
  * Add static entries in the template file.
  */
- 
 
-$kontur -> data['header'] = <<<EOD
+$kontur -> data['header'] = '<h1 class="title">me-sida för gustav söderström </h1><h2>och "kontur" mitt mvc-ramverk</h3>';
 
-<h1 class="title">me-sida för gustav söderström </h1>
-<h2>och "kontur" mitt mvc-ramverk</h3>
-				<nav>
+$kontur -> data['menu'] = '<nav>
                     <ul>
-                        <li><a href="index">presentation</a></li>
-                        <li><a href="report">redovisning</a></li>
-                        <li><a href="source">källkod</a></li>
-                        <li><a href="developer">utvecklare</a></li>
+                        <li><a href="' . base_url() . 'index">presentation</a></li>
+                        <li><a href="' . base_url() . 'guestbook">gästbok</a></li>
+                        <li><a href="' . base_url() . 'report">redovisning</a></li>
+                        <li><a href="' . base_url() . 'source">källkod</a></li>
+                        <li><a href="' . base_url() . 'developer">utvecklare</a></li>    
                     </ul>
-                </nav>
-							
-EOD;
+                </nav>';
 
-$kontur -> data['footer'] = <<<EOD
-
-<div class="footer-container">
+$kontur -> data['footer'] = '<div class="footer-container">
         	<footer class="wrapper">
                 <h3>© 2012 Gustav Söderström</h3>
-                <p>kurs: Databasdrivna webbapplikationer med PHP och Model
-View Controller (MVC)</p>
-<p>moment: Kmom02: Grunden till ett MVC-ramverk</p>
+                <p>kurs: Databasdrivna webbapplikationer med PHP och Model View Controller (MVC)</p>
+				<p>moment: Kmom03: En gästbok i ditt MVC-ramverk</p>
             </footer>
-        </div>
-
-EOD;
+        </div>';

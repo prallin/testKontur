@@ -3,19 +3,19 @@
  * Controller for report
  * För rapporter
  * kurs: Databasdrivna webbapplikationer med PHP och Model View Controller (MVC)
- * 
+ *
  * @package konturCore
  */
- 
- class CCReport implements IController {
- 	
-  /**
-    * Implementing interface IController. All controllers must have an index action.
-   */
+
+class CCReport implements IController {
+
+	/**
+	 * Implementing interface IController. All controllers must have an index action.
+	 */
 	public function Index() {
 		global $kontur;
-		  $kontur->data['title'] = "Gustav Söderström - redovisning"; 
-		  $kontur->data['main'] = <<<EOD
+		$kontur -> data['title'] = "Gustav Söderström - redovisning";
+		$kontur -> data['main'] = <<<EOD
 	  
 				<article>
                     <header>
@@ -24,7 +24,7 @@
                     </header>
                     <section>
                     	<h2>Moment: Kmom01: En boilerplate</h2>
-                        <h3>Utvecklingsmiljö</h2>
+                        <h3>Utvecklingsmiljö</h3>
                         <p>För att skriva kod använde jag Aptana studio3. Jag brukar använda NetBeans eller Eclipse för Java,  men jag är sugen på att testa framförallt NetBeans för php under kursens gång. Installerade XAMPP som lokal testmiljö.</p>
                         <ul>För övrigt :
                         <li>Mac 10.6.8</li>
@@ -47,13 +47,73 @@
                     </section>
                     
 					<section>
-                    	<h2>Moment: Kmom02: Grunden till ett MVC-ramverk</h2> 
-                       <img src="http://localhost/~gustav/kontur/site/img/seq2.png" alt="seq bild" width="600" height="300" />
+                    	<h2>Moment: Kmom02: Grunden till ett MVC-ramverk</h2>
+                    	<h3>Mitt ramverk</h3>
+                    	<p>Valde namnet "kontur" till mitt ramverk för att det ska ge en kontur till informationen den ska hantera. Här är Länken: <a href="
+http://www.student.bth.se/~guse12/kontur/01/">kontur</a></p>                       
                     </section>
+                 	 <section>
+                        <h3>MVC tutorial </h3>
+                        <p>För utom "Lydia så valde jag att arbeta med tutorial <a href="http://net.tutsplus.com/tutorials/php/create-your-first-tiny-mvc-boilerplate-with-php/">Tiny MVC Boilerplate</a> I den saknades många av de delar som finns i "Lydia".  Men den var väldigt bra för att skapa en grundförståelse för hur ett mvc-ramverk fungerar. Jag gjorde ett sequence diagram över "Tiny MVC Boilerplate" </p><p><img src="http://www.student.bth.se/~guse12/kontur/01/site/img/seq2.png" /> </p><p>Det kan vara lite långsamt att titta på video tutorial men den här var bra på att förklara hur delarna i ett MVC hänger ihop.</p>
+                     </section>
+                    <section>
+                        <h3>Grundstrukturen i mitt MVC ramverk</h3>
+                        <p>Valde att arbetade igenom lydia tutorial och ändra den koden till att heta kontur och komplettera med Controllers för de delar som behövdes för att bygga upp en liknande sida som på kurs moment Kmom01.
+Integrera htmlboiler plate med cms var krångligt arbete framförallt för att mvc-ramverket tar över hur url'erna skapas. Till exempel med javascript och css.
+Hade problem med länkarna till css det var svårt att få rätt kommatering runt sökvägen till css dokumentet.
+Tillslut löste jag det med att skriva ut css koden med en echo istället för med en kort php tag. Gjorde även en ny controller för att vissa källkod och använde där samma php script från <a href="http://github.com/mosbth/Utility">Mikael Roos </a> som under föregående kurs moment.
+När jag publicerade "kontur på student servern så dök det upp flera problem men tillslut så hittade jag att det var rättighetsproblem med flera filer och framförallt .htaccess filen som jag hade glömt att ändra RewriteBase till rätt för student servern. Eftersom "Lydia" använder Reflection API i Controllern så använder "kontur" det också.</p>
+                     </section>
+					 <section>
+                        <h3>Publicerat på github</h3>
+                        <p>Har skapat kontot och repository <a href="https://github.com/prallin/testKontur">testKontur</a> på github. 
+Det var svårt att få github att funka smidigt med aptana studio även om det står i deras dokumentation att det ska gå. Jag valde istället att arbeta med terminalen för att hantera github.
+Efter många tester och olika repository som jag tog bort. För att börja om för att det blev fel filer i den. Så lyckades jag tillslut med en. Så nu återstår det att få in nya versioner i samma repository men det antar jag får bli till nästa uppgift.
+                        </p>
+                     </section>
+				 
+					 <section>
+                    	<h2>Kmom03: En gästbok i ditt MVC-ramverk</h2>
+                    	<h3>Codelgniter</h3>
+                    	<p>När jag laddade ner  CodeIgniter och konfigurerade för det nya projektet gästbok.
+Funderade ett tag på hur uppdateringar av codelgniter går till <a href="http://codeigniter.com/user_guide/installation/upgrading.html">och läste om det.</a> 
 
+Jag valde att arbeta utifrån <a href="http://codeigniter.com/user_guide/tutorial/index.html">tutorialn</a> som fins i CI's user guide för att bygga<a href="http://www.student.bth.se/~guse12/CIguestbook/index.php/news"> en enkel nyhetssida.</a> 
+
+
+Det var väldigt  lätt att följa tutorial och mycket roligt att det var så enkelt att komma igång med CI. 
+Sedan byggde jag  <a href="http://www.student.bth.se/~guse12/CIguestbook/index.php/guestbook">en gästbok</a> utifrån den kunskapen som jag fick i tutorialn.
+och arbetade vidare med att flytta över layout (css) från kursens tidigare moment. 
+Det svåraste var att få ordning på url'er för css dokumenten och länkarna i menyn, men hittade ganska snabbt url-helper så det fixade sig med att konstruera en link tag. Läste igenom  CI 's  olika intro texterna under "General Topics" för att få en överblick på CI.
+
+Jag arbetade även igenom <a href="http://dbwebb.se/kunskap/kom-igang-med-codeigniter">CI tutorialn på dbwebb.</a> 
+ 
+Det är därför som det har blivit två stycken <a href="http://www.student.bth.se/~guse12/CIguestbook/index.php/guestbook2">gästböcker på min sida</a> med lite olika utseende. 
+
+
+Kickade även på <a href="http://codeigniter.com/tutorials/">två video tutorial</a>, tyvärr var dessa två till tidigare versioner av CI men det var en då lärorikt och ett sätt att förstå tänket med CI</p>
+                    
+                    </section>
+                 	 <section>
+                        <h3>Mitt egna ramverk "kontur" med gästbok</h3>
+                        <p>Arbetade igenom andra andra stycket med Lydia och omarbetade koden så att det skulle passa mitt egna ramverk Kontur.
+Hade inte tidigare testat sqlite och jag visste inte att det vara så enkelt att sätta upp en  databas (efter lite strul med rättigheter).
+Det här kursmomentet och avsnitt av lydia tutorial var bra på att vissa separeringen av databas, sql-frågor, html-kod och tillslut modell för kodstrukturering.
+                        </p>
+                     </section>
+                      <section>
+                        <h3>Länkar</h3>
+                        <p>
+                        <a href="http://www.student.bth.se/~guse12/kontur/02/index">Kontur med gästbok version 2</a> <br />
+ <a href="http://www.student.bth.se/~guse12/CIguestbook/">Gästbok med Codelgniter</a> <br />
+<a href="https://github.com/prallin/testKontur">Kontur på github </a> </p>
+                     </section>
+     	 
+					 
                 </article>
 
 EOD;
 
 	}
- }
+
+}

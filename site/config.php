@@ -17,12 +17,20 @@
 error_reporting(-1);
 ini_set('display_errors', 1);
 
+/**
+ * Set what to show as debug or developer information in the get_debug() theme helper.
+ */
+$kontur->config['debug']['kontur'] = false;
+$kontur->config['debug']['session'] = false;
+$kontur->config['debug']['timer'] = true;
+$kontur->config['debug']['db-num-queries'] = true;
+$kontur->config['debug']['db-queries'] = true;
 /*
 * Define session name
 */
 
 $kontur->config['session_name'] = preg_replace('/[:\.\/-_]/', '', $_SERVER["SERVER_NAME"]);
-
+$kontur->config['session_key']  = 'kontur';
 /*
 * Define server timezone
 */
@@ -56,6 +64,7 @@ $kontur->config['controllers'] = array(
   'developer' => array('enabled' => true,'class' => 'CCDeveloper'),
   'report' => array('enabled' => true,'class' => 'CCReport'),
   'source' => array('enabled' => true,'class' => 'CCSource'),
+  'guestbook' => array('enabled' => true,'class' => 'CCGuestbook'),
 );
 
 /**
@@ -72,5 +81,10 @@ $kontur->config['controllers'] = array(
   * querystring	=2 => index.php?=controller/method/arg1/arg2/ar3
   */
   
-  $kontur->config['url_typ'] = 1;
+  $kontur->config['url_type'] = 1;
+  
+/**
+* Set database(s).
+*/
+$kontur->config['database'][0]['dsn'] = 'sqlite:' . KONTUR_SITE_PATH . '/data/.ht.sqlite';
  
