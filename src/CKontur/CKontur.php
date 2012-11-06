@@ -7,20 +7,21 @@
 class CKontur implements ISingleton {
 
 	private static $instance = null;
-	public $config  = array();
+	public $config = array();
 	public $request;
 	public $data;
 	public $db;
 	public $views;
 	public $session;
 	public $timer = array();
+	public $user;
 
 	/**
 	 * Constructor
 	 */
 	protected function __construct() {
 		// time page generation
-		$this->timer['first'] = microtime(true);
+		$this -> timer['first'] = microtime(true);
 		// include the site specific config.php and create a ref to $ly to be used by config.php
 		$kontur = &$this;
 		require (KONTUR_SITE_PATH . '/config.php');
@@ -36,10 +37,13 @@ class CKontur implements ISingleton {
 
 		// Create a database object.
 		if (isset($this -> config['database'][0]['dsn'])) {
-			$this -> db = new CMDatabase($this -> config['database'][0]['dsn']);
+			$this -> db = new CDatabase($this -> config['database'][0]['dsn']);
 		}
 		// Create a container for all views and theme data
 		$this -> views = new CViewContainer();
+
+		// Create a object for the user
+		$this -> user = new CMUser($this);
 	}
 
 	/**
@@ -105,13 +109,13 @@ class CKontur implements ISingleton {
 	 */
 	public function ThemeEngineRender() {
 		// Save to session before output anything
-    	$this->session->StoreInSession();
-		
-		  // Is theme enabled?
-   		 if(!isset($this->config['theme'])) {
-    		  return;
-   		 }
-		
+		$this -> session -> StoreInSession();
+
+		// Is theme enabled?
+		if (!isset($this -> config['theme'])) {
+			return;
+		}
+
 		//get the paths and settings for the theme
 		$themeName = $this -> config['theme']['name'];
 		$themePath = KONTUR_INSTALL_PATH . "/themes/{$themeName}";

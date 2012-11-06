@@ -146,6 +146,30 @@ body {
 	padding:1em;
 }
 
+/**
+ * Login menu
+ */
+#login-menu{float:right;font-size:smaller;}
+
+/**
+ * Forms
+ */
+input{
+	font:inherit;
+}
+input[readonly]{
+	color:#666;
+}
+label{
+	font-size:smaller;
+}
+.validation-failed{
+	border:2px solid red;
+}
+.validation-message{
+	color:red;font-size:smaller;
+}
+
 /* ====================
     Menu
    ==================== */

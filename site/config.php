@@ -50,6 +50,14 @@ $kontur->config['character_encoding'] = 'UTF-8';
 $kontur->config['language'] = 'en';
 
 /**
+* How to hash password of new users, choose from: plain, md5salt, md5, sha1salt, sha1.
+*/
+ 	
+$kontur->config['hashing_algorithm'] = 'sha1salt';
+
+
+
+/**
  * Define the contollers, their classname and enable/disable them.
  * The array-key is matched against the url, for example:
  * the url 'developer/dump' would istantiate teh contoller with the key "developer", that is
@@ -65,6 +73,8 @@ $kontur->config['controllers'] = array(
   'report' => array('enabled' => true,'class' => 'CCReport'),
   'source' => array('enabled' => true,'class' => 'CCSource'),
   'guestbook' => array('enabled' => true,'class' => 'CCGuestbook'),
+  'user' => array('enabled' => true,'class' => 'CCUser'),
+  'acp' => array('enabled' => true,'class' => 'CCAdminControlPanel'),
 );
 
 /**
@@ -87,4 +97,11 @@ $kontur->config['controllers'] = array(
 * Set database(s).
 */
 $kontur->config['database'][0]['dsn'] = 'sqlite:' . KONTUR_SITE_PATH . '/data/.ht.sqlite';
+
+
+
+/**
+* Allow or disallow creation of new user accounts.
+*/
+$kontur->config['create_new_users'] = true;
  

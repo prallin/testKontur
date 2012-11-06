@@ -71,9 +71,13 @@ function base_url($url=null) {
 
 /**
  * Create a url to an internal resource.
+ *
+ * @param string the whole url or the controller. Leave empty for current controller.
+ * @param string the method when specifying controller as first argument, else leave empty.
+ * @param string the extra arguments to the method, leave empty if not using method.
  */
-function create_url($url=null) {
-  return CKontur::Instance()->request->CreateUrl($url);
+function create_url($urlOrController=null, $method=null, $arguments=null) {
+  return CKontur::Instance()->request->CreateUrl($urlOrController, $method, $arguments);
 }
 
 
@@ -100,3 +104,31 @@ function current_url() {
 function render_views() {
   return CKontur::Instance()->views->Render();
 }
+
+/**
+* Login menu. Creates a menu which reflects if user is logged in or not.
+*/
+function login_menu() {
+	$kontur = CKontur::Instance();
+	if($kontur->user['isAuthenticated']){
+		$items = "<a href='" . create_url('user/profile') . "'><img class='gravatar' src='" . get_gravatar(20) . "' alt=''> " . $kontur->user['acronym'] . "</a> ";
+		if($kontur->user['hasRoleAdmin']){
+		$items .= "<a href='" . create_url('acp') . "'>acp</a> ";
+		}
+		$items .= "<a href='" . create_url('user/logout') . "'>logout</a> ";
+	} 
+	 
+	else {
+		 $items = "<a href='" . create_url('user/login') . "'>login</a> ";
+	}
+	return "<nav>$items</nav>";
+}
+
+/**
+* Get a gravatar based on the user's email.
+*/
+function get_gravatar($size=null) {
+  return 'http://www.gravatar.com/avatar/' . md5(strtolower(trim(CKontur::Instance()->user['email']))) . '.jpg?' . ($size ? "s=$size" : null);
+}
+
+

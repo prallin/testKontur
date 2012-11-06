@@ -1,11 +1,12 @@
 <?php
 
 /**
- * 
+ * For Session handling in kontur
+ * @package konturCore
  */
 class CSession {
 	
-		/**
+	/**
 	 * Members
 	 */
 	private $key;
@@ -72,8 +73,14 @@ class CSession {
 	public function GetMessages() {
     return isset($this->flash['messages']) ? $this->flash['messages'] : null;
   }
-  
-  
+	
+	/**
+   * Get, Set or Unset the authenticated user
+   */
+  public function SetAuthenticatedUser($profile) { $this->data['authenticated_user'] = $profile; }
+  public function UnsetAuthenticatedUser() { unset($this->data['authenticated_user']); }
+  public function GetAuthenticatedUser() { return $this->authenticated_user; }
+	  
    /**
    * Store values from this object into the session.
    */

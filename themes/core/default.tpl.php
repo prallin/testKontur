@@ -1,3 +1,7 @@
+<?php 
+header('Cache-Control: max-age=28800'); 
+header('Content-type: text/html; charset=utf-8');
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -31,6 +35,7 @@
         <!-- Add your site or application content here -->
         <div class="header-container">
             <header class="wrapper clearfix">
+            	<div id='login-menu'><?=login_menu()?></div>
             	<?=$header?>
             	<?=$menu?>
             </header>

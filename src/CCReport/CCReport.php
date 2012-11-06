@@ -106,7 +106,10 @@ Det här kursmomentet och avsnitt av lydia tutorial var bra på att vissa separe
                         <p>
                         <a href="http://www.student.bth.se/~guse12/kontur/02/index">Kontur med gästbok version 2</a> <br />
  <a href="http://www.student.bth.se/~guse12/CIguestbook/">Gästbok med Codelgniter</a> <br />
-<a href="https://github.com/prallin/testKontur">Kontur på github </a> </p>
+<a href="https://github.com/prallin/testKontur">Kontur på github </a> <br />
+Här var det lite problem när jag gjorde min commit så följde bara meddelandet med och inte tag'en som jag skapat lokalt för min nya version.
+<br /> <a href="http://www.student.bth.se/~guse12/kontur/02/report">Rapport</a></p>
+
                      </section>
      	 
 					 
