@@ -111,7 +111,51 @@ Här var det lite problem när jag gjorde min commit så följde bara meddelande
 <br /> <a href="http://www.student.bth.se/~guse12/kontur/02/report">Rapport</a></p>
 
                      </section>
-     	 
+     	 <section>
+                    	<h2>Moment: Kmom04: Modeller för login, användare och grupper</h2>
+                    	<h3>För sök med zend</h3>
+                    	<p>Försökte installera zend på min lokala utvecklings miljö men det visade sig svårt för att jag använde XAMPP på mac som inte har blivit uppdaterad på länge, men efter myckt trixande så fick jag själva zend biblioteket och php att funka. Men de till hörande Zend Tool har jag inte lyckats installera, de vill inte vara exekverbar och påverka den katalog och installation av zend som jag tycker. Antar att den enklaste lösningen är att använda något färdig konfigurerat server lösning från zend. Just nu fick jag lägga ner mina försök för den här gången och valde istället att gå vidare med CI .</p>
+                    </section>
+                 	 <section>
+                        <h3>Formulärhantering i codeigniter</h3>
+                        <p>Jag valde att arbeta utifrån:<a href="http://codeigniter.com/user_guide/libraries/form_validation.html">codeigniter user guide form validation</a> Det var mycket enkelt att skapa validiering och nya formulär i CI. Med hjälp av Form Helpers och Form Validation från libraries. Möjligheten att skapa en form_validation.php i config mapen som stälde in rätt validiering för formuläret var mycket praktisk. Även funktionen  set_error_delimiters  för att sätta vilken html kod som Form Helper via form_error skriver ut.
+Även om den inte visade alla de delar som lydia-tutorial så borde det inte vara så svårt att skapa en login funktion liknande den. Jag la till ett skapa användare formulär till guestbook siten: <a href="http://www.student.bth.se/~guse12/CIguestbook/index.php/member">CIguestbook</a></p>
+                     </section>
+                     <section>
+                        <h3>Kontur</h3>
+                        <p>För mitt egna cms-system valde jag att följa lydia-tutorialn och den strategi för formulärhantering. För mig var arrayAccess något nytt och det tog tid att få det att fungera.  Det var även bra att kunna köra sqlLit från terminalen det gav lite mer verktyg att arbeta med. Lösen ordet följer också lydia dvs sha1 och saltat. Att integrera gravatar med kontur var väldigt fint och enklare en jag vågat tro. Index sidan på kontur blev ett exempel på  Reflection API och att visa vilka kontrollers som är tillgängliga. Login med validiering fins i övre vänstra hörnet på siten: <a href="http://www.student.bth.se/~guse12/kontur/03/">kontur version 3</a></p>
+                     </section>
+                      <section>
+                        <h3>Länkar</h3>
+                        <p>
+							<a href="http://codeigniter.com/user_guide/libraries/form_validation.html">Codeigniter form validation</a> <br />
+							<a href="http://www.student.bth.se/~guse12/CIguestbook/index.php/member">Mitt codeigniter exempel</a> <br />
+							<a href="http://www.student.bth.se/~guse12/kontur/03/">Mitt CMS kontur exempel</a> <br />
+							<a href="https://github.com/prallin/testKontur">koden för kontur på github</a> <br />
+							<a href="http://www.student.bth.se/~guse12/kontur/03/report/">Den här rapporten</a> <br />
+						</p>
+                     </section>
+                     
+                     <section>
+                     <h2>Moment: Kmom05: Innehåll</h2>
+                     <h3>Skapa och spara webbplatsens innehåll</h3>
+                     <p>Jag utgick från Lydia tutorial för att lägatill skapa, spara och ändra  hantering till mitt cms Kontur.  Valde att att kontrollerar om användaren var inloggad för att kunna ändra och lägga till innehåll genom att visa eller dölja CRUD och init actions. Men via index-sidan som listar alla controller och funktioner så går det att komma runt den kontrollen.</p>
+                     </section>
+                     <section>                   
+                     <h3>Filtrera</h3>
+                     <p>Jag la till stöd för Markdown. När jag gjorde implementationen av Markdown så utgick jag från Lydia tutorialns avsnitt om HTMLPurifier. Det kanske onödigt krångligt att skapa ett eget objekt för filtret efter som Markdown i sig självt inte är beroende av det. Men det kändes rätt endå att sträva efter ett mer objektorienterat arbetsätt. </p>
+                     </section>
+                     <section>                   
+                     <h3>XSS</h3>
+                     <p>Efter att ha läst materialet eller rättare sagt delar av så testa jag  några olika XSS och de olika filterna.  Den enklaste testen  med ett javascript resulterade i att de som inte funkade var php och markdown båda exekverade scriptet. plain och bbcode skrevut scriptet på sidan. html och htmlpurify togbort skriptet helt. Min reaktion var oj så mycket som krävs för att säkra upp en webbplats som tillåter användare att lägga in material i någon form. Det blir antagligen till att hitta färdiga lösningar som kan lösa endel av problematiken och testa och testa igen... Bäst tyckte jag om htmlpurify som hanterade filtreringen och formateringen på ett väldigt fint sätt.  Här kan jag se att det borde gå lät att lägga till en WYSIWYG editor tex. <a href="http://www.tinymce.com/">tinymce</a> och använda htmlpurify på ett fint sätt.</p>
+                     </section>
+                     <h3>Länkar</h3>
+                     <p>
+                     <a href="http://www.student.bth.se/~guse12/kontur/04/">Mitt CMS kontur exempel</a> <br />
+                     <a href="https://github.com/prallin/testKontur">koden för kontur på github</a> <br />
+                     <a href="http://www.student.bth.se/~guse12/kontur/04/report/">Den här rapporten</a> <br />
+                     </p>
+                     </section>
 					 
                 </article>
 

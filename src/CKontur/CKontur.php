@@ -32,8 +32,8 @@ class CKontur implements ISingleton {
 		$this -> session = new CSession($this -> config['session_key']);
 		$this -> session -> PopulateFromSession();
 
-		// Set default date/time-zone
-		date_default_timezone_set($this -> config['timezone']);
+		// Set default date/time-zone	
+                date_default_timezone_set('UTC');
 
 		// Create a database object.
 		if (isset($this -> config['database'][0]['dsn'])) {
@@ -48,7 +48,7 @@ class CKontur implements ISingleton {
 
 	/**
 	 * Singleton pattern. Get the instance of the latest created object or create a new one.
-	 * @return CLydia The instance of this class.
+	 * @return CKontur The instance of this class.
 	 */
 	public static function Instance() {
 		if (self::$instance == null) {

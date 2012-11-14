@@ -86,7 +86,8 @@ class CObject {
     }
     $this->session->AddMessage($type, $message);
   }
-	/**
+
+  /**
 	 * Create an url. Uses $this->request->CreateUrl()
 	 *
 	 * @param $urlOrController string the relative url or the controller

@@ -126,9 +126,49 @@ function login_menu() {
 
 /**
 * Get a gravatar based on the user's email.
+ * @return url url to img gravatar
 */
 function get_gravatar($size=null) {
   return 'http://www.gravatar.com/avatar/' . md5(strtolower(trim(CKontur::Instance()->user['email']))) . '.jpg?' . ($size ? "s=$size" : null);
 }
 
 
+/**
+ * Escape data to make it safe to write in the browser.
+ * @return string escapt string
+ */
+function esc($str) {
+  return htmlEnt($str);
+}
+
+
+/**
+ * 
+ * @param $data string to filter
+ * @param $filter string the filter use
+ * @return string filterd string
+ */
+function filter_data($data, $filter) {
+    return CMContent::Filter($data, $filter);
+}
+
+/**
+ * Display diff of time between now and a datetime. 
+ *
+ * @param $start datetime|string
+ * @returns string
+ */
+function time_diff($start) {
+  return formatDateTimeDiff($start);
+}
+
+/**
+* reflects if user is logged in or not.
+*/
+function authenticated() {
+	$kontur = CKontur::Instance();        
+	if($kontur->user['isAuthenticated']){
+		return true;
+	}
+	return false;
+}

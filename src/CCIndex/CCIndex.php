@@ -42,4 +42,5 @@ class CCIndex extends CObject implements IController {
 	}
 	return $items;   
    }
+
 }

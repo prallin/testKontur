@@ -32,7 +32,7 @@ $kontur->config['debug']['db-queries'] = true;
 $kontur->config['session_name'] = preg_replace('/[:\.\/-_]/', '', $_SERVER["SERVER_NAME"]);
 $kontur->config['session_key']  = 'kontur';
 /*
-* Define server timezone
+*Define default server timezone when displaying date and times to the user. All internals are still UTC.
 */
 
 $kontur->config['timezone'] = 'Europe/Stockholm';
@@ -75,6 +75,9 @@ $kontur->config['controllers'] = array(
   'guestbook' => array('enabled' => true,'class' => 'CCGuestbook'),
   'user' => array('enabled' => true,'class' => 'CCUser'),
   'acp' => array('enabled' => true,'class' => 'CCAdminControlPanel'),
+  'content'   => array('enabled' => true,'class' => 'CCContent'),
+  'page'      => array('enabled' => true,'class' => 'CCPage'),
+  'blog'      => array('enabled' => true,'class' => 'CCBlog'),
 );
 
 /**

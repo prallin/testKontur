@@ -3,7 +3,7 @@
 /**
  * Kontur MVC är byggt och inspererad på Lydia av Mikael Roos (mos@dbwebb.se)
  * kurs: Databasdrivna webbapplikationer med PHP och Model View Controller (MVC)
- * moment: Kmom02: Grunden till ett MVC-ramverk
+ * 
  * Av: Gustav Söderström
  */
 
