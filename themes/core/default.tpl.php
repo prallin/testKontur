@@ -1,7 +1,3 @@
-<?php 
-header('Cache-Control: max-age=28800'); 
-header('Content-type: text/html; charset=utf-8');
-?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -24,7 +20,7 @@ header('Content-type: text/html; charset=utf-8');
         	echo $kontur->data['style']; 
         	}    
 		  ?>
-        <script src="<?php echo $kontur->data['modernizr']; ?>"></script>
+       <script src="<?php echo $kontur->data['modernizr']; ?>"></script>
 
         </head>
     <body>
@@ -51,24 +47,5 @@ header('Content-type: text/html; charset=utf-8');
 
 			<div id="footer"><?=$footer?></div>
 
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-   		
-   		<script>window.jQuery || document.write('<script src="<?php echo $kontur->data['jquery']; ?>"><\/script>')</script>
-        <script src="<?php echo $kontur->data['JSmain']; ?>"></script>
-        <script src="<?php echo $kontur->data['JSplugins']; ?>"></script>
-
-
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            var _gaq=[['_setAccount','UA-34999928-2'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
     </body>
 </html>
