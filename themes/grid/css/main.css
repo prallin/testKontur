@@ -121,7 +121,7 @@ body {
 
 .footer-container
   {
-    border-top: 5px solid #444444;
+  	border-top: 5px solid #444444;
     background: #222222;
     color: white;
     padding: 0px 10px 10px 0px;
@@ -145,23 +145,6 @@ body {
 	margin-top:1em;
 	padding:1em;
 }
-
-/**
- * User feedback message wrappers.
- */
-.error, .alert, .warning, .notice, .success, .info { 
-padding: 0.8em; margin-bottom: 1em; border: 2px solid #ddd; }
-
-.error, .alert { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
-.notice, .warning { background: #fff6bf; color: #514721; border-color: #ffd324; }
-.success       { background: #e6efc2; color: #264409; border-color: #c6d880; }
-.info          { background: #d5edf8; color: #205791; border-color: #92cae4; }
-.error a, .alert a { color: #8a1f11; }
-.notice a, .warning a { color: #514721; }
-.success a         { color: #264409; }
-.info a            { color: #205791; }
-
-
 
 /**
  * Login menu

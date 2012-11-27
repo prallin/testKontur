@@ -14,13 +14,13 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         
         <!-- stylesheet    -->
-        <link rel="stylesheet" href="<?php echo $kontur->data['stylesheetNormalize']; ?>"/>
-        <link rel="stylesheet" href="<?php echo $kontur->data['stylesheetMain']; ?>"/>          
+        <link href='<?= $stylesheet ?>normalize.css' rel="stylesheet" media="screen">
+        <link href='<?= $stylesheet ?>main.css' rel="stylesheet" media="screen">
         <?php if(isset($kontur->data['style'])){
         	echo $kontur->data['style']; 
         	}    
 		  ?>
-       <script src="<?php echo $kontur->data['modernizr']; ?>"></script>
+       <script src='<?= $javascript ?>vendor/modernizr-2.6.1.min.js'></script>
 
         </head>
     <body>
@@ -36,16 +36,28 @@
             	<?=$menu?>
             </header>
         </div>
+               <?php if (region_has_content('flash')): ?>
+            <div id='outer-wrap-flash'>
+                <div id='inner-wrap-flash'>
+                    <div id='flash'><?= render_views('flash') ?></div>
+                </div>
+            </div>
+        <?php endif; ?>
+        
         <div class="main-container">
             <div class="main wrapper clearfix">
             	<?=get_messages_from_session()?>
             	<?=@$main?>
+                <?=render_views('primary')?>
             	<?=render_views()?>
              	<div class="debug"><?=get_debug()?></div>
              </div> <!-- #main -->
         </div> <!-- #main-container -->
-
-			<div id="footer"><?=$footer?></div>
-
+        
+        </div>
+        <div id="footer"><div class="footer-container">
+        	<footer class="wrapper">  
+                <p><?=$footer?></p>	
+            </footer></div> 
     </body>
 </html>

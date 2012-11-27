@@ -75,7 +75,7 @@ function bbcode2html($text) {
 /**
  * Set a default exception handler and enable logging in it.
  */
-function exception_handler($exception) {
+function exception_handler($e) {
 	echo "Kontur: Uncaught exception: <p>" . $e -> getMessage() . "</p><pre>" . $e -> getTraceAsString(), "</pre>";
 }
 

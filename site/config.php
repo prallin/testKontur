@@ -78,13 +78,89 @@ $kontur->config['controllers'] = array(
   'content'   => array('enabled' => true,'class' => 'CCContent'),
   'page'      => array('enabled' => true,'class' => 'CCPage'),
   'blog'      => array('enabled' => true,'class' => 'CCBlog'),
+  'theme'=> array('enabled' => true,'class' => 'CCTheme'),
 );
 
 /**
- * Settings for the theme
+ * Settings for the theme core
  */
+
+/*
  $kontur->config['theme'] = array(
- 'name'=> 'core',);
+ 'name'=> 'core',
+ 'stylesheet'  => 'css/',
+ 'template_file'   => 'default.tpl.php',
+ 'javascript' => 'js/',
+     // A list of valid theme regions
+     'regions' => array('flash','featured-first','featured-middle','featured-last',
+    'primary','sidebar','triptych-first','triptych-middle','triptych-last',
+    'footer-column-one','footer-column-two','footer-column-three','footer-column-four',
+    'footer',),
+     'data' => array(
+         'header' => 'Kontur',
+         'slogan' => 'gustavs A PHP-baserade mvc-ramverk',
+         'favicon' => 'logo80.png',
+         'logo' => 'logo80.png',
+         'logo_width'  => 80,
+         'logo_height' => 80,
+         'footer' => 'Kontur &copy; Gustav Söderström',
+     ),
+);
+*/
+
+/**
+ * Settings for the theme grid
+ */
+
+/*
+ $kontur->config['theme'] = array(
+ 'name'=> 'grid', 
+ 'stylesheet'  => 'style.css',
+ 'template_file'   => 'index.tpl.php',
+     'javascript' => 'js/',
+   // A list of valid theme regions
+     'regions' => array('flash','featured-first','featured-middle','featured-last',
+    'primary','sidebar','triptych-first','triptych-middle','triptych-last',
+    'footer-column-one','footer-column-two','footer-column-three','footer-column-four',
+    'footer',),
+     'data' => array(
+         'header' => 'Kontur',
+         'slogan' => 'gustavs A PHP-baserade mvc-ramverk',
+         'favicon' => 'logo80.png',
+         'logo' => 'logo80.png',
+         'logo_width'  => 80,
+         'logo_height' => 80,
+         'footer' => 'Kontur &copy; Gustav Söderström',
+     ),
+ );
+
+*/
+ 
+ /**
+ * Settings for the theme boot
+ */
+
+ $kontur->config['theme'] = array(
+ 'name'=> 'boot', 
+ 'stylesheet'  => 'bootstrap/css/',
+  'javascript' => 'bootstrap/js/',
+ 'template_file'   => 'index.tpl.php',
+   // A list of valid theme regions
+     'regions' => array('flash','featured-first','featured-middle','featured-last',
+    'primary','sidebar','triptych-first','triptych-middle','triptych-last',
+    'footer-column-one','footer-column-two','footer-column-three','footer-column-four',
+    'footer',),
+     'data' => array(
+         'header' => 'Kontur',
+         'slogan' => 'Gustavs php-baserade mvc-ramverk',
+         'favicon' => 'logo80.png',
+         'logo' => 'logo80.png',
+         'logo_width'  => 80,
+         'logo_height' => 80,
+         'footer' => 'Kontur &copy; Gustav Söderström',
+     ),
+ );
+ 
 
  /**
   * What type of urls shode be used?

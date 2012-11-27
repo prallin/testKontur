@@ -156,7 +156,28 @@ Här var det lite problem när jag gjorde min commit så följde bara meddelande
                      <a href="http://www.student.bth.se/~guse12/kontur/04/report/">Den här rapporten</a> <br />
                      </p>
                      </section>
-					 
+                     
+                     <section>
+                        <h2>Moment: Kmom06: CSS-ramverk och grid layout</h2>
+                        <h3>Lydia Grid</h3>
+                        <p>Följde tutorialn och det går att ändra i configfilen för att bytta layout till 'grid' för att se Lydia layout och 'core' för att se den första layouten. Det var lite job med att ändra den första layouten så att den följde ändringarna för att 'grid' skulle funka, men nu funkar det att växla mellan alla tre: grid, core, boot. Less var mycket roligt och lätt installera med lessphp. Funderade om det är så semantiskt med grid som det borde vara tex så borde det gå att använda taggarna i html 5 mycket mer en att använda olika div taggar. Men jag fortsatte att arbeta efter Lydia tutorialn och sedan så förfördes jag av alt gui i bootstrap. På CCAdminControlPanel så testade jag att använda regioner för att ordna layouten. Lydia tutorial använder semantic.gs så jag använde det också för att göra temat 'grid' men till mitt tema se nedan så använde jag Bootstrap.</p>
+                     </section>
+                     <section>                   
+                        <h3>Mitt tema</h3>
+                        <p>Döpte det till 'boot' för att det använder bootstrap. Förutom bootstraps webbsida som var väldigt bra och förklarande så kollade jag på följande serie av <a href="http://www.youtube.com/watch?v=BVFQc0iGFwU">tutorials på youtube.</a>  Jag la in en kontroll i CCGuestbook om vilket thema som var valt för att kunna välja ett mer specialiserad tpl fil. För att låta bli använda mer bootstrap utsende. För att hella siten ska göra detsamma så skulla fler conntrollers och tpl filer behöva skrivas om. Nu testade jag bara med CCGuestbook för att den hade det enklaste formuläret. Om jag skulle skriva om de mer avanserade funktionerna för att skapa formulär så skulle det vara lätt att tappa möjligheten till att växla till andra theme. la även till eget css för att komplettera layouten. Nu ska det funka att växla mellan temana 'core','grid', 'boot' , men 'core' har inte stöd för alla regioner.</p>
+                     </section>
+                     <section>                   
+                        <h3>Css-ramverk</h3>
+                        <p>På en tidigare kurs i html har jag testat CSS-ramverket 960 gs, men då bara med statisk html och css. Nu med php, less och ett cms så blev det betydligt roligare och även svårare att använda ett css-ramverk. Svårare på det sätt att det ska gå att växla mellan teman. Css-ramverket gör på ett fint sätt att layouten går att få proffsigare och mer lugnt utseende när den följer ett grid.</p>
+                     </section>
+                     <section>
+                     <h3>Länkar</h3>
+                     <p>
+                     <a href="http://www.student.bth.se/~guse12/kontur/05/theme">Mitt CMS kontur exempel med them 'boot'</a> <br />
+                     <a href="https://github.com/prallin/testKontur">koden för kontur på github</a> <br />
+                     <a href="http://www.student.bth.se/~guse12/kontur/05/report/">Den här rapporten</a> <br />
+                     </p>
+                     </section>					 
                 </article>
 
 EOD;

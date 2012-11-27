@@ -18,14 +18,20 @@ class CCGuestbook extends CObject implements IController {
 
 	/**
 	 * Implementing interface IController. All controllers must have an index action.
-  
+         * checks if them is 'boot' and then shifts to specialist tpl
 	 **/
 	 public function Index() {
     $this->views->SetTitle('Kontur Guestbook Example');
+    if ($this->config['theme']['name']==='boot'){
+        $this->views->AddInclude(__DIR__ . '/indexBootThem.tpl.php', array(
+      'entries'=>$this->guestbookModel->ReadAll(), 
+      'formAction'=>$this->request->CreateUrl('', 'handler')));
+    } else {
     $this->views->AddInclude(__DIR__ . '/index.tpl.php', array(
       'entries'=>$this->guestbookModel->ReadAll(), 
       'formAction'=>$this->request->CreateUrl('', 'handler')
     ));
+    }
   }
 	
 

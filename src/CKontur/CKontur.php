@@ -22,7 +22,7 @@ class CKontur implements ISingleton {
 	protected function __construct() {
 		// time page generation
 		$this -> timer['first'] = microtime(true);
-		// include the site specific config.php and create a ref to $ly to be used by config.php
+		// include the site specific config.php and create a ref to $kontur to be used by config.php
 		$kontur = &$this;
 		require (KONTUR_SITE_PATH . '/config.php');
 
@@ -122,17 +122,24 @@ class CKontur implements ISingleton {
 		//$themeUrl	= "themes/{$themeName}";
 		$themeUrl = $this -> request -> base_url . "themes/{$themeName}";
 
-		//Add stylesheet path to the $kontur-data array
+		/*Add stylesheet path to the $kontur-data array
 		$this -> data['stylesheet'] = "{$themeUrl}/style.css";
 		$this -> data['stylesheetNormalize'] = "{$themeUrl}/css/normalize.css";
 		$this -> data['stylesheetMain'] = "{$themeUrl}/css/main.css";
 		$this -> data['stylesheetMain'] = "{$themeUrl}/css/main.css";
+                */
 
-		//Add js path to the $kontur-data array
+		/*Add js path to the $kontur-data array
 		$this -> data['modernizr'] = "{$themeUrl}/js/vendor/modernizr-2.6.1.min.js";
 		$this -> data['jquery'] = "{$themeUrl}/js/vendor/jquery-1.8.0.min.js";
 		$this -> data['JSmain'] = "{$themeUrl}/js/main.js";
 		$this -> data['JSplugins'] = "{$themeUrl}/js/plugins.js";
+                */
+                 
+                 
+                // Add stylesheet path to the $kontur->data array
+                $this->data['stylesheet'] = "{$themeUrl}/".$this->config['theme']['stylesheet'];
+                $this->data['javascript'] = "{$themeUrl}/".$this->config['theme']['javascript'];
 
 		// Include the global functions.php and functions.php that are part of the theme
 		$kontur = &$this;
@@ -141,11 +148,16 @@ class CKontur implements ISingleton {
 		if (is_file($functionsPath)) {
 			include $functionsPath;
 		}
-
+                
+               
 		// Extract $kontur->data and $kontur->view->data to own variables and handover to the template file
 		extract($this -> data);
 		extract($this -> views -> GetData());
-		include ("{$themePath}/default.tpl.php");
+                 if(isset($this->config['theme']['data'])) {
+                extract($this->config['theme']['data']);
+    }
+                $templeFile = (isset($this->config['theme']['template_file'])) ? $this->config['theme']['template_file'] : 'default.tpl.php';
+		include ("{$themePath}/{$templeFile}");
 	}
 
 }
