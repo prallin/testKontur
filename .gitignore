@@ -2,3 +2,6 @@
 /nbproject/
 /apigenDoc/
 /src/CHTMLPurifier/htmlpurifier-4.4.0-standalone/
+# Logs and databases #
+######################
+*.sqlite
