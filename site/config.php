@@ -79,6 +79,8 @@ $kontur->config['controllers'] = array(
   'page'      => array('enabled' => true,'class' => 'CCPage'),
   'blog'      => array('enabled' => true,'class' => 'CCBlog'),
   'theme'=> array('enabled' => true,'class' => 'CCTheme'),
+  'module'=> array('enabled' => true,'class' => 'CCModules'),
+  'my'        => array('enabled' => true,'class' => 'CCMycontroller'),
 );
 
 /**
@@ -109,20 +111,26 @@ $kontur->config['controllers'] = array(
 */
 
 /**
- * Settings for the theme grid
+ * Settings for the theme grid and mytheme 
+ * for recompile Less code - decoment path and swop style.css to style.php
  */
 
 /*
  $kontur->config['theme'] = array(
- 'name'=> 'grid', 
- 'stylesheet'  => 'style.css',
- 'template_file'   => 'index.tpl.php',
-     'javascript' => 'js/',
-   // A list of valid theme regions
-     'regions' => array('flash','featured-first','featured-middle','featured-last',
+     'name'=> 'TestGrid',
+     'parent_name'=> 'grid',
+       'path'            => 'site/themes/mytheme',
+    // 'path'            => 'themes/grid', 
+     'parent'          => 'themes/grid',
+     'stylesheet'      => 'style.css', //
+     'template_file'   => 'index.tpl.php',
+     
+     'regions' => array('navbar', 'flash','featured-first','featured-middle','featured-last',
+         
     'primary','sidebar','triptych-first','triptych-middle','triptych-last',
     'footer-column-one','footer-column-two','footer-column-three','footer-column-four',
     'footer',),
+     'menu_to_region' => array('my-navbar'=>'navbar'),
      'data' => array(
          'header' => 'Kontur',
          'slogan' => 'gustavs A PHP-baserade mvc-ramverk',
@@ -133,23 +141,26 @@ $kontur->config['controllers'] = array(
          'footer' => 'Kontur &copy; Gustav Söderström',
      ),
  );
-
 */
- 
+
  /**
- * Settings for the theme boot
+ * Settings for the theme myboottheme 
  */
 
  $kontur->config['theme'] = array(
- 'name'=> 'boot', 
- 'stylesheet'  => 'bootstrap/css/',
+ 'name'=> 'myboottheme',
+ 'parent_name'=> 'boot',
+ 'path'            => 'site/themes/myboottheme',
+ 'parent'          => 'themes/boot',
+ 'stylesheet'  => 'style.css',
   'javascript' => 'bootstrap/js/',
  'template_file'   => 'index.tpl.php',
    // A list of valid theme regions
-     'regions' => array('flash','featured-first','featured-middle','featured-last',
+     'regions' => array('navbar','flash','featured-first','featured-middle','featured-last',
     'primary','sidebar','triptych-first','triptych-middle','triptych-last',
     'footer-column-one','footer-column-two','footer-column-three','footer-column-four',
     'footer',),
+     'menu_to_region' => array('my-navbar'=>'navbar'),
      'data' => array(
          'header' => 'Kontur',
          'slogan' => 'Gustavs php-baserade mvc-ramverk',
@@ -161,6 +172,35 @@ $kontur->config['controllers'] = array(
      ),
  );
  
+ /**
+ * Settings for the theme boot
+ */
+/*
+ $kontur->config['theme'] = array(
+ 'name'=> 'boot',
+ 'parent_name'=> 'boot',
+ 'path'            => 'themes/boot',
+ //'parent'          => 'themes/boot',
+ 'stylesheet'  => 'style.css',
+  'javascript' => 'bootstrap/js/',
+ 'template_file'   => 'index.tpl.php',
+   // A list of valid theme regions
+     'regions' => array('navbar','flash','featured-first','featured-middle','featured-last',
+    'primary','sidebar','triptych-first','triptych-middle','triptych-last',
+    'footer-column-one','footer-column-two','footer-column-three','footer-column-four',
+    'footer',),
+     'menu_to_region' => array('my-navbar'=>'navbar'),
+     'data' => array(
+         'header' => 'Kontur',
+         'slogan' => 'Gustavs php-baserade mvc-ramverk',
+         'favicon' => 'logo80.png',
+         'logo' => 'logo80.png',
+         'logo_width'  => 80,
+         'logo_height' => 80,
+         'footer' => 'Kontur &copy; Gustav Söderström',
+     ),
+ );
+ */
 
  /**
   * What type of urls shode be used?
@@ -184,3 +224,34 @@ $kontur->config['database'][0]['dsn'] = 'sqlite:' . KONTUR_SITE_PATH . '/data/.h
 */
 $kontur->config['create_new_users'] = true;
  
+/**
+* Define a routing table for urls.
+*
+* Route custom urls to a defined controller/method/arguments
+*/
+$kontur->config['routing'] = array(
+  'home' => array('enabled' => true, 'url' => 'index/index'),
+);
+
+/**
+ * Define menus.
+ * Create hardcoded menus and map them to a theme region through $kontur->config['theme'].
+ */
+
+$kontur->config['menus'] = array(
+    'navbar' => array(
+        'home'      => array('label'=>'Home', 'url'=>'home'),
+        'modules'   => array('label'=>'Modules', 'url'=>'module'),
+        'content'   => array('label'=>'Content', 'url'=>'content'),
+        'guestbook' => array('label'=>'Guestbook', 'url'=>'guestbook'),
+        'blog'      => array('label'=>'Blog', 'url'=>'blog'),
+        ),
+    'my-navbar' => array(
+        'home'      => array('label'=>'About Me', 'url'=>'my'),
+        'blog'      => array('label'=>'My Blog', 'url'=>'my/blog'),
+        'guestbook' => array('label'=>'Guestbook', 'url'=>'my/guestbook'),
+        'modules' => array('label'=>'Documentation', 'url'=>'module'),
+        'raport' => array('label'=>'Report', 'url'=>'report'),
+        'index' => array('label'=>'Install', 'url'=>'index'),
+        ),
+    );

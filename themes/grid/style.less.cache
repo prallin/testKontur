@@ -1,4 +1,4 @@
-a:4:{s:4:"root";s:10:"style.less";s:8:"compiled";s:8586:"html,
+a:4:{s:4:"root";s:10:"style.less";s:8:"compiled";s:9153:"html,
 body,
 div,
 span,
@@ -315,6 +315,10 @@ label {
 .form-action-link {
   font-size: smaller;
 }
+textarea {
+  width: 100%;
+  height: 8em;
+}
 .content-edit input[type=text] {
   width: 30em;
 }
@@ -324,6 +328,8 @@ label {
 }
 html {
   background-color: #eee;
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
 }
 body {
   margin: 0;
@@ -332,8 +338,7 @@ body {
   background-color: #fff;
 }
 #outer-wrap-header {
-  height: 88px;
-  margin-top: 11px;
+  padding-top: 11px;
   margin-bottom: 11px;
 }
 #inner-wrap-header {
@@ -357,7 +362,7 @@ body {
 }
 #login-menu {
   float: right;
-  font-size: smaller;
+  font-size: 0.95em;
 }
 #login-menu img.gravatar {
   vertical-align: middle;
@@ -394,6 +399,29 @@ body {
   text-align: center;
   font-size: 1.5em;
   padding-left: 10px;
+}
+#navbar ul.menu {
+  list-style-type: none;
+  padding: 2px 8px;
+  margin: 0;
+}
+#navbar ul.menu li {
+  padding: 0;
+  margin: 0;
+  display: inline;
+}
+#navbar ul.menu li a {
+  padding: 6px 8px;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+#navbar ul.menu li a:hover {
+  background: #ddd;
+  border: 2px solid #999;
+}
+#navbar ul.menu li a.selected {
+  background: #ccc;
+  border: 2px solid #999;
 }
 #inner-wrap-flash {
   width: 960px;
@@ -467,6 +495,11 @@ body {
   width: 300px;
   margin: 0 10px;
 }
+#sidebar .box {
+  border-top: 4px double #ccc;
+  padding-top: 11px;
+  margin-bottom: 51px;
+}
 #inner-wrap-triptych {
   width: 960px;
   margin: 0 auto;
@@ -520,7 +553,6 @@ body {
   float: left;
   width: 220px;
   margin: 0 10px;
-  font-size: 0.9em;
   margin-top: 1em;
   height: 100%;
   background-color: rgba(255,255,255,0.5);
@@ -614,4 +646,4 @@ a:focus {
 .silent {
   color: #999;
 }
-";s:5:"files";a:2:{s:53:"/Users/gustav/Sites/testKontur/themes/grid/style.less";i:1353427255;s:81:"/Users/gustav/Sites/testKontur/themes/grid/semantic.gs/stylesheets/less/grid.less";i:1331866480;}s:7:"updated";i:1353427259;}
+";s:5:"files";a:2:{s:53:"/Users/gustav/Sites/testKontur/themes/grid/style.less";i:1354713566;s:81:"/Users/gustav/Sites/testKontur/themes/grid/semantic.gs/stylesheets/less/grid.less";i:1331866480;}s:7:"updated";i:1354714103;}

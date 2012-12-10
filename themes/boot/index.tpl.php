@@ -4,16 +4,16 @@
         <meta charset='utf-8'/>
         <title><?= $title ?></title>
         <link rel='shortcut icon' href='<?= theme_url($favicon) ?>'/>
-        <!-- Bootstrap -->
-        <link href='<?= $stylesheet ?>bootstrap.css' rel="stylesheet" media="screen">
-        <link href='<?= $stylesheet ?>style.css' rel="stylesheet" media="screen">
+        <!-- css and Bootstrap -->
+        <link href='<?=theme_url($stylesheet) ?>' rel="stylesheet" media="screen">
+       
     </head>
     <body>
         <div class="row-fluid well">
             <div class="span1"><a href='<?= base_url() ?>'><img id='site-logo' src='<?= theme_url($logo) ?>' alt='logo' width='<?= theme_url($logo_width) ?>' height='<?= theme_url($logo_height) ?>' /></a></div>
             <div class="span7"><h1><a href='<?= base_url() ?>'><?= $header ?></a><small> <?= $slogan ?></small></h1></div>
-            <div class="span2 offset2"><?= login_menu() ?></div>
-            <div class="span8"><?= getMenuThem() ?></div>   
+            <div class="span2 offset1"><?= login_menu() ?></div>
+            <div class="span8" id="navbar"><?=render_views('navbar')?></div>           
         </div>
          <?php if (region_has_content('flash')): ?>
             <div class="row-fluid">
@@ -38,8 +38,8 @@
             <div class="span4 offset1"><?= get_messages_from_session_theme() ?></div>
         </div>
         <div class="row-fluid">
-            <div class="span9 offset1"><?= @$main ?><?= render_views('primary') ?><?= render_views() ?></div>
-            <div id='sidebar'><?=render_views('sidebar')?></div>
+            <div class="span7 offset1"><?= @$main ?><?= render_views('primary') ?><?= render_views() ?></div>
+            <div id='sidebar' class="span2 offset1"><?=render_views('sidebar')?></div>
         </div>
         
         <?php if (region_has_content('triptych-first', 'triptych-middle', 'triptych-last')): ?>

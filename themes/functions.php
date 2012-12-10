@@ -77,7 +77,7 @@ function base_url($url=null) {
  * @param string the extra arguments to the method, leave empty if not using method.
  */
 function create_url($urlOrController=null, $method=null, $arguments=null) {
-  return CKontur::Instance()->request->CreateUrl($urlOrController, $method, $arguments);
+  return CKontur::Instance()->CreateUrl($urlOrController, $method, $arguments);
 }
 
 
@@ -85,10 +85,17 @@ function create_url($urlOrController=null, $method=null, $arguments=null) {
  * Prepend the theme_url, which is the url to the current theme directory.
  */
 function theme_url($url) {
-  $kontur = CKontur::Instance();
-  return "{$kontur->request->base_url}themes/{$kontur->config['theme']['name']}/{$url}";
+  return create_url(CKontur::Instance()->themeUrl . "/{$url}");
 }
 
+/**
+ * Prepend the theme_parent_url, which is the url to the parent theme directory.
+ * @param $url string the url-part to prepend.
+ * @returns string the absolute url.
+ */
+function theme_parent_url($url){
+    return create_url(CKontur::Instance()->themeParentUrl . "/{$url}");
+}
 
 /**
  * Return the current url.

@@ -1,5 +1,22 @@
 <h1>Index Controller</h1>
-<p>This is what you can do for now.</p>
-<?php foreach($menu as $val): ?>
-<li><a href='<?=create_url($val)?>'><?=$val?></a>  
-<?php endforeach; ?>
+<p>Welcome to Kontur index controller.</p>
+
+<h2>Download</h2>
+<p>You can download Kontur from github.</p>
+<blockquote>
+<code>git clone git://github.com/prallin/testKontur.git</code>
+</blockquote>
+<p>You can review its source directly on github: <a href='https://github.com/prallin/testKontur'>https://github.com/prallin/testKontur</a></p>
+
+<h2>Installation</h2>
+<p>First you have to make the data-directory writable. This is the place where Kontur needs
+to be able to write and create files.</p>
+<blockquote>
+<code>cd testKontur; chmod 777 site/data</code>
+</blockquote>
+
+<p>Second, Kontur has some modules that need to be initialised. You can do this through a 
+controller. Point your browser to the following link.</p>
+<blockquote>
+<a href='<?=create_url('module/install')?>'>module/install</a>
+</blockquote>

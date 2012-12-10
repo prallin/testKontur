@@ -4,7 +4,7 @@
  *
  * @package KonturCore
  */
-class CCUser extends CObject implements  IController {
+class CCUser extends CObject implements  IController{
 
 	/**
 	 * Constructor
@@ -54,14 +54,6 @@ class CCUser extends CObject implements  IController {
 	public function Logout() {
 		$this -> user -> Logout();
 		$this -> RedirectToController('login');
-	}
-
-	/**
-	 * Init for user
-	 */
-	public function Init() {
-		$this -> user -> Init();
-		$this -> RedirectToController();
 	}
 
 	/**

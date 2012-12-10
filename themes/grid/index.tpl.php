@@ -4,7 +4,7 @@
         <meta charset='utf-8'/>
         <title><?= $title ?></title>
         <link rel='shortcut icon' href='<?=theme_url($favicon)?>'/>
-        <link rel='stylesheet' href='<?= $stylesheet ?>'/>
+        <link rel='stylesheet' href='<?=theme_url($stylesheet) ?>'/>
         
         <?php if(isset($inline_style)): ?><style><?=$inline_style?></style><?php endif; ?>
     </head>
@@ -19,7 +19,9 @@
                         <span id='site-title'><a href='<?= base_url() ?>'><?= $header ?></a></span>
                         <span id='site-slogan'><?= $slogan ?></span>
                     </div>
-                    <?=getMenu()?>
+                    <?php if(region_has_content('navbar')): ?>
+                    <div id='navbar'><?=render_views('navbar')?></div>
+                    <?php endif; ?>
                 </div>
                 
             </div>
@@ -62,9 +64,9 @@
         <?php endif; ?>
 
         
-        <div id='outer-wrap-footer-column'>
+        <div id='outer-wrap-footer'>
             <?php if (region_has_content('footer-column-one', 'footer-column-two', 'footer-column-three', 'footer-column-four')): ?>
-            <div id='inner-wrap-footer-column'>
+            <div id='inner-wrap-footer'>
                 <div id='footer-column-one'><?= render_views('footer-column-one') ?></div>
                 <div id='footer-column-two'><?= render_views('footer-column-two') ?></div>
                 <div id='footer-column-three'><?= render_views('footer-column-three') ?></div>

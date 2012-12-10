@@ -67,13 +67,11 @@ class CViewContainer {
             return;
         foreach ($this->views[$region] as $view) {
             switch ($view['type']) {
-                case 'include' :
-                    extract($view['variables']);
-                    include ($view['file']);
+                case 'include': if (isset($view['variables']))
+                        extract($view['variables']); include($view['file']);
                     break;
-                case 'string' :
-                    extract($view['variables']);
-                    echo $view['string'];
+                case 'string': if (isset($view['variables']))
+                        extract($view['variables']); echo $view['string'];
                     break;
             }
         }
@@ -100,9 +98,9 @@ class CViewContainer {
      */
     public function RegionHasView($region) {
         if (is_array($region)) {
-            foreach($region as $val){
-                if(isset($this->views[$val])){
-                  return TRUE;  
+            foreach ($region as $val) {
+                if (isset($this->views[$val])) {
+                    return TRUE;
                 }
             }
             return false;
@@ -110,21 +108,20 @@ class CViewContainer {
             return (isset($this->views[$region]));
         }
     }
-      /**
-   * Add inline style.
-   *
-   * @param $value string to be added as inline style.
-   * @returns $this.
-   */
-  public function AddStyle($value){
-      if(isset($this->data['inline_style'])){
-          $this->data['inline_style'] .= $value;
-      } else {
-         $this->data['inline_style'] = $value;  
-      }
-      return $this;
-      
-  }
-    
+
+    /**
+     * Add inline style.
+     *
+     * @param $value string to be added as inline style.
+     * @returns $this.
+     */
+    public function AddStyle($value) {
+        if (isset($this->data['inline_style'])) {
+            $this->data['inline_style'] .= $value;
+        } else {
+            $this->data['inline_style'] = $value;
+        }
+        return $this;
+    }
 
 }

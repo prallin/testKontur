@@ -5,6 +5,7 @@
     Description:
         Purpose of the stylesheet follows.
 */
+@import url(bootstrap/css/bootstrap.css);
 .messages {
     background-color: #0088CC;
     color: white;
