@@ -177,7 +177,56 @@ Här var det lite problem när jag gjorde min commit så följde bara meddelande
                      <a href="https://github.com/prallin/testKontur">koden för kontur på github</a> <br />
                      <a href="http://www.student.bth.se/~guse12/kontur/05/report/">Den här rapporten</a> <br />
                      </p>
-                     </section>					 
+                     </section>
+                      <section>
+                        <h2>Moment:Kmom07: Färdigställ och produktifiera ramverket</h2>
+                        <h3>Dokumentation</h3>
+                        <p>Förutom den dokumentation som ramverket själv genererar genom funktionerna i  lydia tutorialn  så fins en <a href="http://www.student.bth.se/~guse12/kontur/06/apigenDoc/">dokumentation genererad via apigen.</a>  Genom NetBeans så hittade jag <a href="http://apigen.org/"> apigen </a>som jag använde för att lära mig att generera PHPDoc till kontur. Försökte installera apigen med med pear men efter som jag använder XAMPP för mac  så gick det inte så smärtfritt som jag först tänkte utan det slutade med att jag laddade hem en fristående version med alla lib filer.</p>
+                        </section>
+                     <section>                   
+                        <h3>Git och Github</h3>
+                        <p>En fin start på att lära sig git var: <a href="http://try.github.com">http://try.github.com</a> Även om det har gått fint (nästan) under kursen  med att uppdatera via terminalen så testade NetBeans för att den har en  inbyggda hanteringen av git.  NetBeans var en väldigt smärt fritt sätt att använda git och github. Förutom att jag hade lite problem med att få taggarna att hamna rätt. För mig har github varit en ny och väldigt bra sak att lära mig. Det har också betytt att jag är mindre rädd för att skriva fel eller testa nya saker i ett projekt för det fins hela tiden en historia att gå tillbaka till. Det har även betytt att jag lästa mycket kod från andra projekt. kontur på github tag v8 :<a href=" https://github.com/prallin/testKontur/tree/v8">https://github.com/prallin/testKontur/tree/v8</a></p></section>
+                     <section>                   
+                        <h3>Summering av Kontur mitt ramverk </h3>
+                        <p>Kontur kan hantera och vissa information så som en blog eller page, en gästbok och stöd för olika teman för att påverka hur  webbplatsen ska se ut. Det finns möjlighet att skapa nya användare och att loggain för att få tillgång till att ändra innehållet på blog eller page. De kan testas på den här <a href="http://www.student.bth.se/~guse12/kontur/06/">  test sidan. </a><br />Det fins även många användbara verktyg som stöd för utveckling av ramverket så som: 
+                        <ul>
+                        <li><a href="http://www.student.bth.se/~guse12/kontur/06/index">Installation:  </a>med beskrivning och enkelt sätt att skapa en databas för webbplatsens information. </li>
+                        <li><a href="http://www.student.bth.se/~guse12/kontur/06/module">Dokumentation: </a> Module Manager som visar vilka moduler som är i gång. Samt möjlighet att få en närmare beskrivning av hur de är konstruerade och kodens dokumentation.
+                        <li><a href="http://www.student.bth.se/~guse12/kontur/06/theme"> Tema: </a> Visar vilket aktuellt tema och vilket det eventuellt ärver i från. Under sidor som underlättar vid layout.
+                        <li><a href="http://www.student.bth.se/~guse12/kontur/06/source"> Källkod: </a> Visar Källkod för kontur</li>
+                        <li><a href="http://www.student.bth.se/~guse12/kontur/06/developer">Developer: </a> Kan användas för att testa om olika still på länkar fungerar och vissa objekt för som är bra föra att kontrollera vilken information som hanteras av systemet.</li>
+                        </ul>
+                        Till stora följer Kontur Lydia de extra features är modulen CCSource som visar källkoden för ramverket den är baserad på den är i sin tur baserad på ett php <a href="https://github.com/mosbth/Utility">script från Mikael Roos</a>
+                        En annan extra sak är mitt grund temat "boot" som är baserat på bootstrap. Det går även att ärva "boot" temat för att skapa egna teman i från för att göra mindre justeringar. Det fins en del att göra för att använda bootstrap mer framför allt att genom att modifiera tpl filerna som nu genom child theme går att göra på ett mycket enklare sätt.
+                        </p>
+                        </section>
+                        <section>
+                        <h3>Test installation</h3>
+                        <p>Test att installerade Kontur via github. Det gick i det stora hela bra, här är några saker som jag stötte på:
+                        <ul>
+                        <li>Välja rätt mapp vid cloningen var lite lurigt så  att installationen hamnade på rätt nivå.</li>
+                        <li>Ändringar i .htaccess filen är nödvändiga för att få webplatsen att fungera. RewriteBase till rätt sökväg.</li>
+                        <li>Ändringarna av rättigheter för site/data fungerade men tog inte med sig rättigheteran på .ht.sqlite utan det fick jag göra i efter hand. När jag undersökt saken så beror det på att jag har lagt upp en .ht.sqlite fil på github som clonas med alla andra filer. La till en *.sqlite i .gitnore filen för att i fortsättningen inte ta med databasen.</li>
+                        <li>Ändringar i config filen: för att  ändra fast information så som namn, slogan, logo, footer information.</li>
+                        <li>Ändra menus  i comfig filen så att den stämmer</li>
+                        <li>Efter installation ändra i routing table förslagsvis lägga till en routing regel : <code>'' => array('enabled' => true, 'url' => 'my'),</code> En som för base url  är tom och pekar på den controller som man vill ska vara först. Det för att hindra att installationen(index) kommer upp.</li>
+                        <li>Sist även ändra i config filen och stänga av debug. stänga av error reporting eller rapportera till logg fil. Här skulle det vara bra att get_tools, get_debug i footern också stängdes av.</li>
+                        <li>När allt är klart kan även vara bra att stänga av några moduler som behöver och är tillgängliga vid installationen men kanske inte ska vara igång vid en publik sida:  t.ex.. module, theme, source, report, developer, index</li>                 
+                        </ul>
+                        </p>
+                        </section>
+                     <section>
+                     <h3>Länkar</h3>
+                     <p>
+                     <ul>
+                     <li><a href="http://www.student.bth.se/~guse12/kontur/06/">Test installation</a></li>  
+                     <li><a href="https://github.com/prallin/testKontur/tree/v8">Kontur på github tag v8</a> </li>     
+                     <li><a href="http://www.student.bth.se/~guse12/kontur/06/apigenDoc/">Test installation: dokumentation apigen</a></li>
+                     <li><a href="http://www.student.bth.se/~guse12/kontur/06/module">Test installation dokumentation via kontu</a></li>
+                       <li><a href="http://www.student.bth.se/~guse12/kontur/06/report"> Den här rapporten </a></li>                    
+                    </ul>                     
+                    </p>
+                     </section>	
                 </article>
 
 EOD;

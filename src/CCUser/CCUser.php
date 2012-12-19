@@ -133,5 +133,5 @@ class CCUser extends CObject implements  IController{
       $this->RedirectToController('create');
     }
   }
-
+    
 }

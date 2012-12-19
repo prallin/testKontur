@@ -10,6 +10,7 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
      * Properties
      */
     public $profile = array();
+    public $data = array();
 
     /**
      * Constructor
@@ -64,13 +65,21 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
             'get group memberships' => 'SELECT * FROM Groups AS g INNER JOIN User2Groups AS ug ON g.id=ug.idGroups WHERE ug.idUser=?;',
             'update profile' => "UPDATE User SET name=?, email=?, updated=datetime('now') WHERE id=?;",
             'update password' => "UPDATE User SET algorithm=?, salt=?, password=?, updated=datetime('now') WHERE id=?;",
+            'select * user' => "SELECT * FROM User;",
+            'select * group' => "SELECT * FROM Groups;",
+            'delete group' => "DELETE FROM Groups WHERE id=?;",
+            'select id group' => "SELECT * FROM Groups WHERE id=?;",
+            'update group' => "UPDATE Groups SET acronym=?, name=? WHERE id=?;",
+            'delete user' => "DELETE FROM User WHERE id=?;",
+            'select id user' => "SELECT * FROM User WHERE id=?;",
+            'update user profile' => "UPDATE User SET acronym=?, name=?, email=?, updated=datetime('now') WHERE id=?;",
+            'delete user2group' => "DELETE FROM User2Groups WHERE idUser=? AND idGroups=?;",
         );
         if (!isset($queries[$key])) {
             throw new Exception("No such SQL query, key '$key' was not found.");
         }
         return $queries[$key];
     }
-
 
     /**
      * Login by autenticate the user and password. Store user information in session if success.
@@ -137,7 +146,7 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
      */
     public function ChangePassword($plain) {
         $password = $this->CreatePassword($plain);
-        $this->db->ExecuteQuery(self::SQL('update password'), array($password['algoritm'], $password['salt'], $password['password'], $this['id']));
+        $this->db->ExecuteQuery(self::SQL('update password'), array($password['algorithm'], $password['salt'], $password['password'], $this['id']));
         return $this->db->RowCount() === 1;
     }
 
@@ -151,9 +160,9 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
      */
     public function CreatePassword($plain, $algorithm = null) {
         $password = array(
-            'algorithm' => ($algorithm ? $algoritm : CKontur::Instance()->config['hashing_algorithm']), 'salt' => null
+            'algorithm' => ($algorithm ? $algorithm : CKontur::Instance()->config['hashing_algorithm']),
+            'salt' => null
         );
-
         switch ($password['algorithm']) {
             case 'sha1salt': $password['salt'] = sha1(microtime());
                 $password['password'] = sha1($password['salt'] . $plain);
@@ -169,7 +178,6 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
                 break;
             default: throw new Exception('Unknown hashing algorithm');
         }
-
         return $password;
     }
 
@@ -217,6 +225,56 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
         return true;
     }
 
+    /**
+     * List all users
+     */
+    public function ListAllUsers() {
+        try {
+            return $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select * user', null));
+        } catch (Exception $e) {
+            echo $e;
+            return null;
+        }
+    }
+
+    /**
+     * Lista all groups
+     * @return array all groups from db
+     */
+    public function ListAllGroups() {
+        try {
+            return $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select * group', null));
+        } catch (Exception $e) {
+            echo $e;
+            return null;
+        }
+    }
+
+    public function getGroup($id) {
+        $res = $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select id group'), array($id));
+        if (empty($res)) {
+            $this->AddMessage('error', "Failed to load groupe with id : '$id'.");
+            return false;
+        } else {
+            $this->data = $res[0];
+        } return true;
+    }
+ 
+    public function getGroupMemberships($id){
+        $groups = array();
+        $groups['groups'] = $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('get group memberships'), array($id));
+        return $groups;
+    }
+ 
+    
+    
+    
+    /**
+     * Manage Install User modul
+     * @param type $action
+     * @return type
+     * @throws Exception
+     */
     public function Manage($action = null) {
         switch ($action) {
             case 'install':
@@ -250,6 +308,87 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
                 throw new Exception('Unsupported action for this module.');
                 break;
         }
+    }
+
+    public function CreateGroup($acronym, $name) {
+        $this->db->ExecuteQuery(self::SQL('insert into group'), array($acronym, $name));
+        if ($this->db->RowCount() == 0) {
+            $this->AddMessage('error', "Failed to create groupe.");
+            return false;
+        }
+        return true;
+    }
+
+    public function SaveGroup($id, $acronym, $name) {
+        $this->db->ExecuteQuery(self::SQL('update group'), array($acronym, $name, $id));
+        if ($this->db->RowCount() == 0) {
+            $this->AddMessage('error', "Failed to edit and save groupe.");
+            return false;
+        }
+        return true;
+    }
+
+    public function DoDeletegroup($id) {
+        $this->db->ExecuteQuery(self::SQL('delete group'), array($id));
+        if ($this->db->RowCount() == 0) {
+            $this->AddMessage('error', "Failed to delete group.");
+            return false;
+        }
+        return true;
+    }
+
+    public function Deleteuser($id) {
+        $this->db->ExecuteQuery(self::SQL('delete user'), array($id));
+        if ($this->db->RowCount() == 0) {
+            $this->AddMessage('error', "Failed to delete user.");
+            return false;
+        }
+        return true;
+    }
+
+    public function getUser($id) {
+        $res = $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select id user'), array($id));
+        if (empty($res)) {
+            $this->AddMessage('error', "Failed to load usere with id : '$id'.");
+            return false;
+        } else {
+            $this->data = $res[0];
+        } return true;
+    }
+
+    public function SaveUser($id, $acronym, $name, $email) {
+        $this->db->ExecuteQuery(self::SQL('update user profile'), array($acronym, $name, $email, $id));
+        if ($this->db->RowCount() == 0) {
+            $this->AddMessage('error', "Failed to edit and save user.");
+            return false;
+        }
+        return true;
+    }
+
+    public function ChangeUserPassword($plain, $id) {
+        $password = $this->CreatePassword($plain);
+        $this->db->ExecuteQuery(self::SQL('update password'), array($password['algorithm'], $password['salt'], $password['password'], $id));
+        return $this->db->RowCount() === 1;
+    }
+
+    public function LeaveGroup($groupeid, $userid) {
+        $this->db->ExecuteQuery(self::SQL('delete user2group'), array($userid, $groupeid));
+        if ($this->db->RowCount() == 0) {
+            $this->AddMessage('error', "Failed to Leave groupe.");
+            return false;
+        }
+        return true;
+    }
+
+    public function JoinGroup($groupeid, $userid) {
+        try {
+        $this->db->ExecuteQuery(self::SQL('insert into user2group'), array($userid, $groupeid));
+        } catch (Exception $e){}
+        if ($this->db->RowCount() == 0) {
+            $this->AddMessage('error', "Failed to join groupe.");
+            return false;
+        }
+        return true;
     }
 
 }

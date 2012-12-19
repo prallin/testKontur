@@ -231,6 +231,7 @@ $kontur->config['create_new_users'] = true;
 */
 $kontur->config['routing'] = array(
   'home' => array('enabled' => true, 'url' => 'index/index'),
+  //'' => array('enabled' => true, 'url' => 'my'),
 );
 
 /**
@@ -249,9 +250,6 @@ $kontur->config['menus'] = array(
     'my-navbar' => array(
         'home'      => array('label'=>'About Me', 'url'=>'my'),
         'blog'      => array('label'=>'My Blog', 'url'=>'my/blog'),
-        'guestbook' => array('label'=>'Guestbook', 'url'=>'my/guestbook'),
-        'modules' => array('label'=>'Documentation', 'url'=>'module'),
-        'raport' => array('label'=>'Report', 'url'=>'report'),
-        'index' => array('label'=>'Install', 'url'=>'index'),
+        'guestbook' => array('label'=>'Guestbook', 'url'=>'my/guestbook'),   
         ),
     );
