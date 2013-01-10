@@ -1,10 +1,3 @@
-<h3>Tools Users</h3>
-<ul>
-    <li>ändra ny användare</li>
-</ul>
-
-
-
 <table class="table table-striped table-bordered table-hover">
     <caption><h4>Users</h4></caption>
     <thead>

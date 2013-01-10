@@ -4,7 +4,7 @@
  * Controller for a test website
  * @author gustav
  */
-class CCMycontroller extends CObject implements IController {
+class CCMysite extends CObject implements IController {
 
     /**
      * construktor

@@ -63,7 +63,7 @@ class CMDatabase {
 	 * Return last insert id.
 	 */
 	public function LastInsertId() {
-		return $this -> db -> lastInsertid();
+		return $this -> db -> lastInsertid();     
 	}
 
 	/**

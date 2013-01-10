@@ -43,14 +43,19 @@ class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {
 
         $queries = array(
             'drop table content' => "DROP TABLE IF EXISTS Content;",
+            'drop table content2group' => "DROP TABLE IF EXISTS Content2Groups;",
+            'create table content2group' => "CREATE TABLE IF NOT EXISTS Content2Groups (idContent INTEGER, idGroups INTEGER, created DATETIME default (datetime('now')), PRIMARY KEY(idContent, idGroups));",
             'create table content' => "CREATE TABLE IF NOT EXISTS Content (id INTEGER PRIMARY KEY, key TEXT KEY, type TEXT, title TEXT, data TEXT, filter TEXT, idUser INT, created DATETIME default (datetime('now')), updated DATETIME default NULL, deleted DATETIME default NULL, FOREIGN KEY(idUser) REFERENCES User(id));",
             'insert content' => 'INSERT INTO Content (key,type,title,data,filter,idUser) VALUES (?,?,?,?,?,?);',
+            'insert into content2group' => 'INSERT INTO Content2Groups (idContent,idGroups) VALUES (?,?);',
             'select * by id' => 'SELECT c.*, u.acronym as owner FROM Content AS c INNER JOIN User as u ON c.idUser=u.id WHERE c.id=? AND deleted IS NULL;',
             'select * by key' => 'SELECT c.*, u.acronym as owner FROM Content AS c INNER JOIN User as u ON c.idUser=u.id WHERE c.key=? AND deleted IS NULL;',
             'select * by type' => "SELECT c.*, u.acronym as owner FROM Content AS c INNER JOIN User as u ON c.idUser=u.id WHERE type=? AND deleted IS NULL ORDER BY {$order_by} {$order_order};",
             'select *' => 'SELECT c.*, u.acronym as owner FROM Content AS c INNER JOIN User as u ON c.idUser=u.id WHERE deleted IS NULL;',
             'update content' => "UPDATE Content SET key=?, type=?, title=?, data=?, filter=?, updated=datetime('now') WHERE id=?;",
             'update content as deleted' => "UPDATE Content SET deleted=datetime('now') WHERE id=?;",
+            'get group memberships' => "SELECT * FROM Groups AS g INNER JOIN Content2Groups AS ug ON g.id=ug.idGroups WHERE ug.idContent=?;",
+            'delete content2group' => "DELETE FROM Content2Groups WHERE idContent=? AND idGroups=?;",
         );
         if (!isset($queries[$key])) {
             throw new Exception("No such SQL query, key '$key' was not found.");
@@ -69,7 +74,9 @@ class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {
             case 'install' :
                 try {
                     $this->db->ExecuteQuery(self::SQL('drop table content'));
+                    $this->db->ExecuteQuery(self::SQL('drop table content2group'));
                     $this->db->ExecuteQuery(self::SQL('create table content'));
+                    $this->db->ExecuteQuery(self::SQL('create table content2group'));
                     $this->db->ExecuteQuery(self::SQL('insert content'), array('hello-world', 'post', 'Hello World', "This is a demo post.\n\nThis is another row in this demo post.", 'plain', $this->user['id']));
                     $this->db->ExecuteQuery(self::SQL('insert content'), array('hello-world-again', 'post', 'Hello World Again', "This is another demo post.\n\nThis is another row in this demo post.", 'plain', $this->user['id']));
                     $this->db->ExecuteQuery(self::SQL('insert content'), array('hello-world-once-more', 'post', 'Hello World Once More', "This is one more demo post.\n\nThis is another row in this demo post.", 'plain', $this->user['id']));
@@ -141,8 +148,25 @@ class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {
      */
     public function ListAll($args = null) {
         try {
-            if (isset($args) && isset($args['type'])) {
-                return $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select * by type', $args), array($args['type']));
+            if (isset($args) && isset($args['type'])) {              
+               $res = $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select * by type', $args), array($args['type']));
+               $resSelect = array();
+               $notSelect = array();
+               foreach ($res as $val) { 
+                   if($this->checkGroup($val['id'])){             
+                        array_push($resSelect, $val);
+                   } else {
+                       array_push($notSelect, $val);
+                   }
+               }
+               var_dump($notSelect);
+               
+               foreach ($notSelect as $i) {
+                   if($this->noGroupe($i['id'])){
+                        array_push($resSelect, $i);
+                   }
+               }
+               return $resSelect;
             } else {
                 return $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select *', $args));
             }
@@ -151,24 +175,23 @@ class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {
             return null;
         }
     }
-    
+
     /**
      * Delete content. Set its deletion-date to enable wastebasket functionality.
      */
-    public function Delete(){
-        if($this['id']){
+    public function Delete() {
+        if ($this['id']) {
             $this->db->ExecuteQuery(self::SQL('update content as deleted'), array($this['id']));
         }
         $rowcount = $this->db->RowCount();
-        if($rowcount){
-           $this->AddMessage('success', "Successfully set content '" . htmlEnt($this['key']) . "' as deleted."); 
+        if ($rowcount) {
+            $this->AddMessage('success', "Successfully set content '" . htmlEnt($this['key']) . "' as deleted.");
         } else {
             $this->AddMessage('error', "Failed to set content '" . htmlEnt($this['key']) . "' as deleted.");
         }
         return $rowcount === 1;
     }
 
-    
     /**
      * Load content by id.
      *
@@ -218,6 +241,62 @@ class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {
      */
     public function GetFilteredData() {
         return $this->Filter($this['data'], $this['filter']);
+    }
+
+    public function GetGroupMemberships($id) {
+        $groups = array();
+        $groups['groups'] = $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('get group memberships'), array($id));
+        return $groups;
+    }
+
+    public function LeaveGroup($groupeid, $contentid) {
+        $this->db->ExecuteQuery(self::SQL('delete content2group'), array($contentid, $groupeid));
+        if ($this->db->RowCount() == 0) {
+            $this->AddMessage('error', "Failed to Leave groupe.");
+            return false;
+        }
+        return true;
+    }
+
+    public function JoinGroup($groupeid, $contentid) {
+        try {
+            $this->db->ExecuteQuery(self::SQL('insert into content2group'), array($contentid, $groupeid));
+        } catch (Exception $e) {
+            
+        }
+        if ($this->db->RowCount() == 0) {
+            $this->AddMessage('error', "Failed to join groupe.");
+            return false;
+        }
+        return true;
+    }
+    /**
+     * 
+     * @param type $goupid
+     * @return boolean
+     */
+    public function checkGroup($contentid) {
+       if($this->session->GetAuthenticatedUser()){
+           $Usergroups = $this->user->getGroupMemberships($this->user->profile['id']);
+           $Contentgroups = $this->GetGroupMemberships($contentid); 
+           foreach ($Contentgroups["groups"] as $cgroups) {
+           foreach ($Usergroups["groups"] as $ugroups) {
+                if ($cgroups["id"] === $ugroups["id"]){
+                    return TRUE;
+                }
+            }
+        }
+       }      
+        return FALSE;
+    }
+
+    public function noGroupe($contentid) {  
+        $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('get group memberships'), array($contentid));
+        if ($this->db->RowCount() == 0) {
+            $this->AddMessage('error', "ingen grupp");
+            return true;
+        }
+        return FALSE;
     }
 
 }
