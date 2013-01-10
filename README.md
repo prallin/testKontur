@@ -17,12 +17,12 @@ Att bygga en egen anpassad webbplats utifrån ramverket gör lättas genom att s
 2. Skapa och placera en css fil i den ny tema mappen.  I det css dokumentet kan förändringar från grund temat göras.  Viktigt är att importera grund temat (det som ska ärvas). Genom att längst upp i dokumentet skriva: @import url(../../../themes/boot/style.css);
 3. Lägg även in filen med den logotyp du vill använda på sidan i den nya mappen. 
 4. Ändringar i site/config.php för att skapa och aktivera ett "childe" themes.
-	a. Leta upp stycket kommenterat med "Settings for the childe theme 'myboottheme'". kopiera det och kommentera ut det.
-	b. I kopian så ändra inställningarna för 'name' så att det är det nya temat som du vill skapa. 'path' är sökvägen till din nyskapade tema map. 'stylesheet' är namnet på din nya css fil.
-	c. Här går det även att ändra på den fasta informationen på den nya webbplatsen så som:  'header' är titel på sidan, 'slogan' är slogan som vissas under header, 'footer' är sid sid foten.
-	d. För att lägga in din nya loggo ändra på värdet på 'logo' till rätt filnamn. Ändra även på 'logo_width', 'logo_height' så att värdet stämmer med pixel antalet på den nya loggan.
-	e. Navigeringsmenyn ändras under stycket 'menu_to_region' => array('my-navbar' => 'navbar'), Där 'my-navbar' ska byttas ut mot den nya menyn som du vill skapa t.ex 'mysite-navbar'
-	f. Skapa och lägg till din meny. Leta upp stycket  kommenterat med "Define menus." Där kan du lägga till din nya menyn.  Genom att lägga 'mysite-navbar' på liknande sätt som 'mu-navbar' exempelvis:
+a. Leta upp stycket kommenterat med "Settings for the childe theme 'myboottheme'". kopiera det och kommentera ut det.
+b. I kopian så ändra inställningarna för 'name' så att det är det nya temat som du vill skapa. 'path' är sökvägen till din nyskapade tema map. 'stylesheet' är namnet på din nya css fil.
+c. Här går det även att ändra på den fasta informationen på den nya webbplatsen så som:  'header' är titel på sidan, 'slogan' är slogan som vissas under header, 'footer' är sid sid foten.
+d. För att lägga in din nya loggo ändra på värdet på 'logo' till rätt filnamn. Ändra även på 'logo_width', 'logo_height' så att värdet stämmer med pixel antalet på den nya loggan.
+e. Navigeringsmenyn ändras under stycket 'menu_to_region' => array('my-navbar' => 'navbar'), Där 'my-navbar' ska byttas ut mot den nya menyn som du vill skapa t.ex 'mysite-navbar'
+f. Skapa och lägg till din meny. Leta upp stycket  kommenterat med "Define menus." Där kan du lägga till din nya menyn.  Genom att lägga 'mysite-navbar' på liknande sätt som 'mu-navbar' exempelvis:
 
 ''mysite-navbar' => array(
         'home' => array('label' => 'About Me', 'url' => 'mysite'),
@@ -32,6 +32,7 @@ Att bygga en egen anpassad webbplats utifrån ramverket gör lättas genom att s
 
 ##Att skapa en blog, en sida.
 Görs enklast genom att skapa en mapp med kontroller med tillhörande templet fil under site/src. Följ nedanstående punkter:
+
 1. Skapa en mapp i site/src med namn på den kontroller du vill skapa namnet ska börja med CC. Det kan vara t.ex CCMysite.
 2. I mappen site/src/CCMycontroller fins exempel på en controller CCMycontroller.php kopiera in den i din nya mapp och döp om den så att den har samma namn som din mapp (med fil ändelse .php).
 3. I det dokumentet ska du byta class namn från CCMycontroller till det du valt t.ex: CCMysite
