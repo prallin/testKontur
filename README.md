@@ -1,5 +1,8 @@
 #README
 
+##Kontur är ett MVC-ramverk skrivet i php
+om kontur vad som går att göra
+
 ##Installation
 1. Clona från: https://github.com/prallin/testKontur.git
 2. Ändra rättigheter rekursiv på mappen och filer site/data till läsa och skriva. Terminal i terminal: chmod -R 777 site/data
@@ -15,9 +18,10 @@ Att bygga en egen anpassad webbplats utifrån ramverket gör lättas genom att s
 
 1. Skapa en mapp i site/themes med namn på temat som ska skapas.
 2. Skapa och placera en css fil i den ny tema mappen.  I det css dokumentet kan förändringar från grund temat göras.  Viktigt är att importera grund temat (det som ska ärvas). Genom att längst upp i dokumentet skriva: @import url(../../../themes/boot/style.css);
-3. Lägg även in filen med den logotyp du vill använda på sidan i den nya mappen. 
+3. Lägg även in filen med den logotyp du vill använda på sidan i den nya mappen.
 
 Ändringar i site/config.php för att skapa och aktivera ett "childe" themes.
+
 1. Leta upp stycket kommenterat med "Settings for the childe theme 'myboottheme'". kopiera det och kommentera ut det.
 2. I kopian så ändra inställningarna för 'name' så att det är det nya temat som du vill skapa. 'path' är sökvägen till din nyskapade tema map. 'stylesheet' är namnet på din nya css fil.
 3. Här går det även att ändra på den fasta informationen på den nya webbplatsen så som:  'header' är titel på sidan, 'slogan' är slogan som vissas under header, 'footer' är sid sid foten.
