@@ -27,9 +27,11 @@ class CCAdminControlPanel extends CObject implements IController {
         $this->views->AddInclude(__DIR__ . '/toolUser.tpl.php', array('user' => $this->users->ListAllUsers(),), 'primary');
         $this->views->AddInclude(__DIR__ . '/toolGroups.tpl.php', array('group' => $this->users->ListAllGroups(),), 'primary');
     }
-
+    
     /**
      * Create group 
+     * @param type $akronym
+     * @param type $name
      */
     public function CreateGroup($akronym = null, $name = null) {
 
@@ -44,6 +46,10 @@ class CCAdminControlPanel extends CObject implements IController {
                 ));
     }
 
+    /**
+     * Creategroup
+     * @param type $form
+     */
     public function DoCreategroup($form) {
         if ($form) {
             $this->users->CreateGroup($form['acronym']['value'], $form['name']['value']);
@@ -56,7 +62,8 @@ class CCAdminControlPanel extends CObject implements IController {
     }
 
     /**
-     * editgroup
+     * Editgroup
+     * @param type $id
      */
     public function Editgroup($id) {
         if (!($id === '1' || $id === '2')) {
@@ -76,6 +83,10 @@ class CCAdminControlPanel extends CObject implements IController {
         }
     }
 
+    /**
+     * Save Edit group
+     * @param type $form
+     */
     public function DoEditgroup($form) {
         if ($form) {
             $this->users->SaveGroup($form['id']['value'], $form['acronym']['value'], $form['name']['value']);
@@ -88,7 +99,8 @@ class CCAdminControlPanel extends CObject implements IController {
     }
 
     /**
-     * Create group 
+     * Deletegroup
+     * @param type $id
      */
     public function Deletegroup($id) {
         if (!($id === '1' || $id === '2')) {
@@ -115,6 +127,7 @@ class CCAdminControlPanel extends CObject implements IController {
 
     /**
      * edit user
+     * @param type $id
      */
     public function Edituser($id) {
         if (!($id === '1' || $id === '2')) {
@@ -136,6 +149,10 @@ class CCAdminControlPanel extends CObject implements IController {
         }
     }
 
+    /**
+     * Save profile
+     * @param type $form
+     */
     public function DoEditProfileSave($form) {
         if ($form) {
             $this->users->SaveUser($form['id']['value'], $form['acronym']['value'], $form['name']['value'], $form['email']['value']);
@@ -147,6 +164,10 @@ class CCAdminControlPanel extends CObject implements IController {
         }
     }
 
+    /**
+     * Save changed password
+     * @param type $form
+     */
     public function DoEditChangePassword($form) {
         if ($form['password']['value'] != $form['password1']['value'] || empty($form['password']['value']) || empty($form['password1']['value'])) {
             $this->AddMessage('error', 'Password does not match or is empty.');
@@ -158,7 +179,8 @@ class CCAdminControlPanel extends CObject implements IController {
     }
 
     /**
-     * Create user 
+     * Delete usere
+     * @param type $id
      */
     public function Deleteuser($id) {
         if (!($id === '1' || $id === '2')) {
@@ -175,6 +197,11 @@ class CCAdminControlPanel extends CObject implements IController {
         }
     }
 
+    /**
+     * User to leave group
+     * @param type $groupeid
+     * @param type $userid
+     */
     public function Leave($groupeid, $userid) {
         if($this->users->LeaveGroup($groupeid, $userid)){
             $this->AddMessage('success', "the User Leave the group");
@@ -186,6 +213,11 @@ class CCAdminControlPanel extends CObject implements IController {
         
     }
 
+    /**
+     * User to join group
+     * @param type $groupeid
+     * @param type $userid
+     */
     public function Join($groupeid, $userid) {
         
         if ($this->users->JoinGroup($groupeid, $userid)) {

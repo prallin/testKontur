@@ -250,6 +250,12 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
         }
     }
 
+    
+    /**
+     * Get a group with an id
+     * @param type $id
+     * @return boolean
+     */
     public function getGroup($id) {
         $res = $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select id group'), array($id));
         if (empty($res)) {
@@ -260,6 +266,11 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
         } return true;
     }
  
+    /**
+     * get a user's group memberships
+     * @param type $id
+     * @return type
+     */
     public function getGroupMemberships($id){
         $groups = array();
         $groups['groups'] = $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('get group memberships'), array($id));
@@ -293,7 +304,7 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
                     $idDoeUser = $this->db->LastInsertId();
                     $this->db->ExecuteQuery(self::SQL('insert into group'), array('admin', 'The Administrator Group'));
                     $idAdminGroup = $this->db->LastInsertId();
-                    $this->db->ExecuteQuery(self::SQL('insert into group'), array('user', 'The User Group'));
+                    $this->db->ExecuteQuery(self::SQL('insert into group'), array('user', 'The Public User Group'));
                     $idUserGroup = $this->db->LastInsertId();
                     $this->db->ExecuteQuery(self::SQL('insert into user2group'), array($idRootUser, $idAdminGroup));
                     $this->db->ExecuteQuery(self::SQL('insert into user2group'), array($idRootUser, $idUserGroup));
@@ -310,6 +321,12 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
         }
     }
 
+    /**
+     * Create a Group
+     * @param type $acronym
+     * @param type $name
+     * @return boolean
+     */
     public function CreateGroup($acronym, $name) {
         $this->db->ExecuteQuery(self::SQL('insert into group'), array($acronym, $name));
         if ($this->db->RowCount() == 0) {
@@ -318,7 +335,14 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
         }
         return true;
     }
-
+    
+    /**
+     * Save a group
+     * @param type $id
+     * @param type $acronym
+     * @param type $name
+     * @return boolean
+     */
     public function SaveGroup($id, $acronym, $name) {
         $this->db->ExecuteQuery(self::SQL('update group'), array($acronym, $name, $id));
         if ($this->db->RowCount() == 0) {
@@ -328,6 +352,11 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
         return true;
     }
 
+    /**
+     * Delete a group
+     * @param type $id
+     * @return boolean
+     */
     public function DoDeletegroup($id) {
         $this->db->ExecuteQuery(self::SQL('delete group'), array($id));
         if ($this->db->RowCount() == 0) {
@@ -337,6 +366,11 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
         return true;
     }
 
+    /**
+     * Delete a user
+     * @param type $id
+     * @return boolean
+     */
     public function Deleteuser($id) {
         $this->db->ExecuteQuery(self::SQL('delete user'), array($id));
         if ($this->db->RowCount() == 0) {
@@ -346,6 +380,11 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
         return true;
     }
 
+    /**
+     * Get a user
+     * @param type $id
+     * @return boolean
+     */
     public function getUser($id) {
         $res = $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select id user'), array($id));
         if (empty($res)) {
@@ -356,6 +395,14 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
         } return true;
     }
 
+    /**
+     * Save a user
+     * @param type $id
+     * @param type $acronym
+     * @param type $name
+     * @param type $email
+     * @return boolean
+     */
     public function SaveUser($id, $acronym, $name, $email) {
         $this->db->ExecuteQuery(self::SQL('update user profile'), array($acronym, $name, $email, $id));
         if ($this->db->RowCount() == 0) {
@@ -365,12 +412,24 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
         return true;
     }
 
+    /**
+     * Change User Password
+     * @param type $plain
+     * @param type $id
+     * @return type
+     */
     public function ChangeUserPassword($plain, $id) {
         $password = $this->CreatePassword($plain);
         $this->db->ExecuteQuery(self::SQL('update password'), array($password['algorithm'], $password['salt'], $password['password'], $id));
         return $this->db->RowCount() === 1;
     }
 
+    /**
+     * User to Leave a Group 
+     * @param type $groupeid
+     * @param type $userid
+     * @return boolean
+     */
     public function LeaveGroup($groupeid, $userid) {
         $this->db->ExecuteQuery(self::SQL('delete user2group'), array($userid, $groupeid));
         if ($this->db->RowCount() == 0) {
@@ -380,6 +439,12 @@ class CMUser extends CObject implements CHasSQL, ArrayAccess, IModule {
         return true;
     }
 
+    /**
+     * User to Join Group
+     * @param type $groupeid
+     * @param type $userid
+     * @return boolean
+     */
     public function JoinGroup($groupeid, $userid) {
         try {
         $this->db->ExecuteQuery(self::SQL('insert into user2group'), array($userid, $groupeid));

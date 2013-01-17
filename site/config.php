@@ -77,9 +77,96 @@ $kontur->config['controllers'] = array(
     'blog' => array('enabled' => true, 'class' => 'CCBlog'),
     'theme' => array('enabled' => true, 'class' => 'CCTheme'),
     'module' => array('enabled' => true, 'class' => 'CCModules'),
-    'my' => array('enabled' => false, 'class' => 'CCMycontroller'),
-    'mysite' => array('enabled' => true, 'class' => 'CCMysite'),  
+    'my' => array('enabled' => true, 'class' => 'CCMycontroller'),  
 );
+
+/**
+ * What type of urls shode be used?
+ * 
+ * default	= 0 => index.php/controller/metod/arg/arg3/arg3
+ * clean	= 1 => controller/method/arg1/arg2/arg3
+ * querystring	=2 => index.php?=controller/method/arg1/arg2/ar3
+ */
+$kontur->config['url_type'] = 1;
+
+/**
+ * Set database(s).
+ */
+$kontur->config['database'][0]['dsn'] = 'sqlite:' . KONTUR_SITE_PATH . '/data/.ht.sqlite';
+
+
+
+/**
+ * Allow or disallow creation of new user accounts.
+ */
+$kontur->config['create_new_users'] = true;
+
+/**
+ * Define a routing table for urls.
+ *
+ * Route custom urls to a defined controller/method/arguments
+ */
+$kontur->config['routing'] = array(
+    'home' => array('enabled' => true, 'url' => 'index/index'),
+        //'' => array('enabled' => true, 'url' => 'mysite'),
+);
+
+/**
+ * Define menus.
+ * Create hardcoded menus and map them to a theme region through $kontur->config['theme'].
+ */
+$kontur->config['menus'] = array(
+    'navbar' => array(
+        'home' => array('label' => 'Home', 'url' => 'home'),
+        'modules' => array('label' => 'Modules', 'url' => 'module'),
+        'content' => array('label' => 'Content', 'url' => 'content'),
+        'guestbook' => array('label' => 'Guestbook', 'url' => 'guestbook'),
+        'blog' => array('label' => 'Blog', 'url' => 'blog'),
+    ),
+    'my-navbar' => array(
+        'home' => array('label' => 'About Me', 'url' => 'my'),
+        'blog' => array('label' => 'My Blog', 'url' => 'my/blog'),
+        'guestbook' => array('label' => 'Guestbook', 'url' => 'my/guestbook'),
+    ),
+);
+
+/* *******************************
+ * Settings for different themes 
+ * You can switch between themes. 
+ * By commented out and in 
+ * different themes.
+ * *******************************
+ */
+
+/**
+ * Settings for the childe theme "myboottheme"
+ */
+$kontur->config['theme'] = array(
+    'name' => 'myboottheme',
+    'parent_name' => 'boot',
+    'path' => 'site/themes/myboottheme',
+    'parent' => 'themes/boot',
+    'stylesheet' => 'style.css',
+    'javascript' => 'bootstrap/js/',
+    'template_file' => 'index.tpl.php',
+    // A list of valid theme regions
+    'regions' => array('navbar', 'flash', 'featured-first', 'featured-middle', 'featured-last',
+        'primary', 'sidebar', 'triptych-first', 'triptych-middle', 'triptych-last',
+        'footer-column-one', 'footer-column-two', 'footer-column-three', 'footer-column-four',
+        'footer',),
+    'menu_to_region' => array('my-navbar' => 'navbar'),
+    'data' => array(
+        'header' => 'Kontur',
+        'slogan' => 'Gustavs php-baserade mvc-ramverk',
+        'favicon' => 'logo32.png',
+        'logo' => 'logo80.png',
+        'logo_width' => 80,
+        'logo_height' => 80,
+        'footer' => 'Kontur &copy; Gustav Söderström',
+    ),
+);
+
+
 
 /**
  * Settings for the theme core
@@ -141,66 +228,6 @@ $kontur->config['controllers'] = array(
  */
 
 /**
- * Settings for the childe theme "myboottheme"
- */
-/*
-$kontur->config['theme'] = array(
-    'name' => 'myboottheme',
-    'parent_name' => 'boot',
-    'path' => 'site/themes/myboottheme',
-    'parent' => 'themes/boot',
-    'stylesheet' => 'style.css',
-    'javascript' => 'bootstrap/js/',
-    'template_file' => 'index.tpl.php',
-    // A list of valid theme regions
-    'regions' => array('navbar', 'flash', 'featured-first', 'featured-middle', 'featured-last',
-        'primary', 'sidebar', 'triptych-first', 'triptych-middle', 'triptych-last',
-        'footer-column-one', 'footer-column-two', 'footer-column-three', 'footer-column-four',
-        'footer',),
-    'menu_to_region' => array('my-navbar' => 'navbar'),
-    'data' => array(
-        'header' => 'Kontur',
-        'slogan' => 'Gustavs php-baserade mvc-ramverk',
-        'favicon' => 'logo32.png',
-        'logo' => 'logo80.png',
-        'logo_width' => 80,
-        'logo_height' => 80,
-        'footer' => 'Kontur &copy; Gustav Söderström',
-    ),
-);
-*/
-
-
-/**
- * Settings for the childe theme "myboottheme"
- */
-$kontur->config['theme'] = array(
-    'name' => 'testthemes',
-    'parent_name' => 'boot',
-    'path' => 'site/themes/testthemes',
-    'parent' => 'themes/boot',
-    'stylesheet' => 'styles.css',
-    'javascript' => 'bootstrap/js/',
-    'template_file' => 'index.tpl.php',
-    // A list of valid theme regions
-    'regions' => array('navbar', 'flash', 'featured-first', 'featured-middle', 'featured-last',
-        'primary', 'sidebar', 'triptych-first', 'triptych-middle', 'triptych-last',
-        'footer-column-one', 'footer-column-two', 'footer-column-three', 'footer-column-four',
-        'footer',),
-    'menu_to_region' => array('mysite-navbar' => 'navbar'),
-    'data' => array(
-        'header' => 'my test',
-        'slogan' => 'ett nyt thema',
-        'favicon' => 'logo32.png',
-        'logo' => 'logo80.png',
-        'logo_width' => 80,
-        'logo_height' => 80,
-        'footer' => 'Kontur &copy; Kosma',
-    ),
-);
-
-
-/**
  * Settings for the theme boot
  */
 /*
@@ -229,58 +256,3 @@ $kontur->config['theme'] = array(
   ),
   );
  */
-
-/**
- * What type of urls shode be used?
- * 
- * default	= 0 => index.php/controller/metod/arg/arg3/arg3
- * clean	= 1 => controller/method/arg1/arg2/arg3
- * querystring	=2 => index.php?=controller/method/arg1/arg2/ar3
- */
-$kontur->config['url_type'] = 1;
-
-/**
- * Set database(s).
- */
-$kontur->config['database'][0]['dsn'] = 'sqlite:' . KONTUR_SITE_PATH . '/data/.ht.sqlite';
-
-
-
-/**
- * Allow or disallow creation of new user accounts.
- */
-$kontur->config['create_new_users'] = true;
-
-/**
- * Define a routing table for urls.
- *
- * Route custom urls to a defined controller/method/arguments
- */
-$kontur->config['routing'] = array(
-    'home' => array('enabled' => true, 'url' => 'index/index'),
-    //'' => array('enabled' => true, 'url' => 'mysite'),
-);
-
-/**
- * Define menus.
- * Create hardcoded menus and map them to a theme region through $kontur->config['theme'].
- */
-$kontur->config['menus'] = array(
-    'navbar' => array(
-        'home' => array('label' => 'Home', 'url' => 'home'),
-        'modules' => array('label' => 'Modules', 'url' => 'module'),
-        'content' => array('label' => 'Content', 'url' => 'content'),
-        'guestbook' => array('label' => 'Guestbook', 'url' => 'guestbook'),
-        'blog' => array('label' => 'Blog', 'url' => 'blog'),
-    ),
-    'my-navbar' => array(
-        'home' => array('label' => 'About Me', 'url' => 'my'),
-        'blog' => array('label' => 'My Blog', 'url' => 'my/blog'),
-        'guestbook' => array('label' => 'Guestbook', 'url' => 'my/guestbook'),
-    ),
-    'mysite-navbar' => array(
-        'home' => array('label' => 'About Me', 'url' => 'mysite'),
-        'blog' => array('label' => 'My Blog', 'url' => 'mysite/blog'),
-        'guestbook' => array('label' => 'Guestbook', 'url' => 'mysite/guestbook'),
-    ),
-);

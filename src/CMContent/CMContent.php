@@ -1,10 +1,4 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of CMContent,php
  *
@@ -18,6 +12,10 @@ class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {
      */
     public $data;
 
+    /**
+     * Construktor
+     * @param type $id
+     */
     public function __construct($id = null) {
         parent::__construct();
 
@@ -77,12 +75,18 @@ class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {
                     $this->db->ExecuteQuery(self::SQL('drop table content2group'));
                     $this->db->ExecuteQuery(self::SQL('create table content'));
                     $this->db->ExecuteQuery(self::SQL('create table content2group'));
-                    $this->db->ExecuteQuery(self::SQL('insert content'), array('hello-world', 'post', 'Hello World', "This is a demo post.\n\nThis is another row in this demo post.", 'plain', $this->user['id']));
-                    $this->db->ExecuteQuery(self::SQL('insert content'), array('hello-world-again', 'post', 'Hello World Again', "This is another demo post.\n\nThis is another row in this demo post.", 'plain', $this->user['id']));
-                    $this->db->ExecuteQuery(self::SQL('insert content'), array('hello-world-once-more', 'post', 'Hello World Once More', "This is one more demo post.\n\nThis is another row in this demo post.", 'plain', $this->user['id']));
-                    $this->db->ExecuteQuery(self::SQL('insert content'), array('home', 'page', 'Home page', "<article><header><h1>Bakgrund</h1><p>Jag är föd i Skellefteå men bor just nu i Lviv i Ukraina med sambo och katt och är för närvarande tjänstledig från mitt arbete i Göteborg som tekniker och handledare i digitalamedier på ett företag som håller på med support för kulturtidskrifter och kulturentreprenörer. Det innebär att jag har haft hand om systemunderhåll på mac datorer och drivit ett litet webbhotell. Handlett i bland annat i videoredigering, adobe-program, wordpress. Har byggt flera enklare webbplatser och har haft flera olika roller i några mer avancerade webbprojekt. Men jag har alltid fått ta in någon för att lösa programmeringen när det har blivit lite mer krångligt.</p></header><section><h2>Tidigare studier</h2><p>Sedan 2 år så har jag studerat programmering och webbutveckling på distans. Nu i våras så läset jag Designmönster med Java på Mittuniversitetet. På Högskolan i väst har jag läst Webbutveckling med delkurser som exempelvis php, mysql, xml, html.</p></section><section><h2>Förväntningar</h2><p>Min förhoppning på kursen ska göra mig mer säker på php, MVC, CMS system och knyta i hopp kunskaperna från mina tidigare kurser.</p></section></article>", 'htmlpurify', $this->user['id']));
-                    $this->db->ExecuteQuery(self::SQL('insert content'), array('about', 'page', 'About page', "This is a demo page, this could be your personal home-page.\n\n Kontur is a PHP MVC at: https://github.com/prallin/testKontur it is based on Lydia tutorial at: http://dbwebb.se/lydia/tutorial.", 'plain', $this->user['id']));
-                    $this->db->ExecuteQuery(self::SQL('insert content'), array('download', 'page', 'Download page', "This is a demo page, this could be your personal download-page.\n\nYou can download your own copy of kontur from https://github.com/prallin/testKontur", 'plain', $this->user['id']));
+                    $this->db->ExecuteQuery(self::SQL('insert content'), array('hello-world', 'post', 'Hello World', "This is a demo post.\n\nThis is another row in this demo post.", 'plain', '1'));
+                    $this->db->ExecuteQuery(self::SQL('insert content'), array('hello-world-again', 'post', 'Hello World Again', "This is another demo post.\n\nThis is another row in this demo post.", 'plain', '1'));
+                    $this->db->ExecuteQuery(self::SQL('insert content'), array('hello-world-admin', 'post', 'Hello World Administratör', "Det här är en test post som bara sak ses av administratörer.\n\n som inte vissas när användaren inte är inloggad.", 'plain', '1'));
+                    $this->db->ExecuteQuery(self::SQL('insert content'), array('home', 'page', 'Home page', "<article><header><h1>Bakgrund</h1><p>Jag är föd i Skellefteå men bor just nu i Lviv i Ukraina med sambo och katt och är för närvarande tjänstledig från mitt arbete i Göteborg som tekniker och handledare i digitalamedier på ett företag som håller på med support för kulturtidskrifter och kulturentreprenörer. Det innebär att jag har haft hand om systemunderhåll på mac datorer och drivit ett litet webbhotell. Handlett i bland annat i videoredigering, adobe-program, wordpress. Har byggt flera enklare webbplatser och har haft flera olika roller i några mer avancerade webbprojekt. Men jag har alltid fått ta in någon för att lösa programmeringen när det har blivit lite mer krångligt.</p></header><section><h2>Tidigare studier</h2><p>Sedan 2 år så har jag studerat programmering och webbutveckling på distans. Nu i våras så läset jag Designmönster med Java på Mittuniversitetet. På Högskolan i väst har jag läst Webbutveckling med delkurser som exempelvis php, mysql, xml, html.</p></section><section><h2>Förväntningar</h2><p>Min förhoppning på kursen ska göra mig mer säker på php, MVC, CMS system och knyta i hopp kunskaperna från mina tidigare kurser.</p></section></article>", 'htmlpurify', '1'));
+                    $this->db->ExecuteQuery(self::SQL('insert content'), array('about', 'page', 'About page', "This is a demo page, this could be your personal home-page.\n\n Kontur is a PHP MVC at: https://github.com/prallin/testKontur it is based on Lydia tutorial at: http://dbwebb.se/lydia/tutorial.", 'plain', '1'));
+                    $this->db->ExecuteQuery(self::SQL('insert content'), array('download', 'page', 'Download page', "This is a demo page, this could be your personal download-page.\n\nYou can download your own copy of kontur from https://github.com/prallin/testKontur", 'plain', '1'));
+                    $this->db->ExecuteQuery(self::SQL('insert into content2group'), array('1', '2'));
+                    $this->db->ExecuteQuery(self::SQL('insert into content2group'), array('2', '2'));
+                    $this->db->ExecuteQuery(self::SQL('insert into content2group'), array('3', '1')); 
+                    $this->db->ExecuteQuery(self::SQL('insert into content2group'), array('4', '2')); 
+                    $this->db->ExecuteQuery(self::SQL('insert into content2group'), array('5', '2')); 
+                    $this->db->ExecuteQuery(self::SQL('insert into content2group'), array('6', '2')); 
                     return array('success', 'Successfully created the database tables and created a default "Hello World" blog post, owned by you.');
                 } catch (Exception$e) {
                     die("$e<br/>Failed to open database: " . $this->config['database'][0]['dsn']);
@@ -143,30 +147,19 @@ class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {
 
     /**
      * List all content.
-     *
      * @returns array with listing or null if empty.
      */
     public function ListAll($args = null) {
         try {
-            if (isset($args) && isset($args['type'])) {              
-               $res = $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select * by type', $args), array($args['type']));
-               $resSelect = array();
-               $notSelect = array();
-               foreach ($res as $val) { 
-                   if($this->checkGroup($val['id'])){             
+            if (isset($args) && isset($args['type'])) {
+                $res = $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select * by type', $args), array($args['type']));
+                $resSelect = array();    
+                foreach ($res as $val) {
+                    if ($this->checkGroup($val['id'])) {
                         array_push($resSelect, $val);
-                   } else {
-                       array_push($notSelect, $val);
-                   }
-               }
-               var_dump($notSelect);
-               
-               foreach ($notSelect as $i) {
-                   if($this->noGroupe($i['id'])){
-                        array_push($resSelect, $i);
-                   }
-               }
-               return $resSelect;
+                    } 
+                }         
+                return $resSelect;
             } else {
                 return $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('select *', $args));
             }
@@ -243,12 +236,23 @@ class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {
         return $this->Filter($this['data'], $this['filter']);
     }
 
+    /**
+     * Returns array of the content group membership
+     * @param type $id
+     * @return type
+     */
     public function GetGroupMemberships($id) {
         $groups = array();
         $groups['groups'] = $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('get group memberships'), array($id));
         return $groups;
     }
 
+    /**
+     * Removes membership of group for current content
+     * @param type $groupeid
+     * @param type $contentid
+     * @return boolean
+     */
     public function LeaveGroup($groupeid, $contentid) {
         $this->db->ExecuteQuery(self::SQL('delete content2group'), array($contentid, $groupeid));
         if ($this->db->RowCount() == 0) {
@@ -258,6 +262,12 @@ class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {
         return true;
     }
 
+    /**
+     * Adds group membership to content
+     * @param type $groupeid
+     * @param type $contentid
+     * @return boolean
+     */
     public function JoinGroup($groupeid, $contentid) {
         try {
             $this->db->ExecuteQuery(self::SQL('insert into content2group'), array($contentid, $groupeid));
@@ -270,34 +280,30 @@ class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {
         }
         return true;
     }
+
     /**
-     * 
+     * Checks contents groups against the user groups
+     * If the user is not logged in it is set to the public group 2
      * @param type $goupid
      * @return boolean
      */
     public function checkGroup($contentid) {
-       if($this->session->GetAuthenticatedUser()){
-           $Usergroups = $this->user->getGroupMemberships($this->user->profile['id']);
-           $Contentgroups = $this->GetGroupMemberships($contentid); 
-           foreach ($Contentgroups["groups"] as $cgroups) {
-           foreach ($Usergroups["groups"] as $ugroups) {
-                if ($cgroups["id"] === $ugroups["id"]){
+        if ($this->session->GetAuthenticatedUser()) {
+            $Usergroups = $this->user->getGroupMemberships($this->user->profile['id']);
+        } else {       
+            $Usergroups = array("groups" => array("id" => '2'));
+        }
+        $Contentgroups = $this->GetGroupMemberships($contentid);
+        foreach ($Contentgroups["groups"] as $cgroups) {
+            foreach ($Usergroups["groups"] as $ugroups) {
+                if ($cgroups["id"] === $ugroups["id"]) {
                     return TRUE;
                 }
             }
         }
-       }      
         return FALSE;
     }
 
-    public function noGroupe($contentid) {  
-        $this->db->ExecuteSelectQueryAndFetchAll(self::SQL('get group memberships'), array($contentid));
-        if ($this->db->RowCount() == 0) {
-            $this->AddMessage('error', "ingen grupp");
-            return true;
-        }
-        return FALSE;
-    }
 
 }
 

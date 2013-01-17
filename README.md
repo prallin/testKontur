@@ -1,7 +1,10 @@
 #README
 
-##Kontur är ett MVC-ramverk skrivet i php
-om kontur vad som går att göra
+##Kontur
+Ett MVC-ramverk skrivet i php.
+Student arbete på kursen "Databasdrivna webbapplikationer med PHP och Model
+View Controller" vid Blekinge Tekniska Högskola.
+
 
 ##Installation
 1. Clona från: https://github.com/prallin/testKontur.git
@@ -13,7 +16,7 @@ om kontur vad som går att göra
 ##Anpassning av ramverket.
 För att skapa ett "childe" tema samt en blog och en sida.
 
-Standardtema "boot" för Konturi är baserat på Lydias men skiljer sig på att den använder sig av bootstrap och därigenom skiljer sig t.ex  fonter, färger och formulär. 
+Standardtema "boot" för Konturi använder sig av bootstrap. 
 Att bygga en egen anpassad webbplats utifrån ramverket gör lättas genom att skapa ett "childe" themes i site mappen och genom att göra ändringar i site/config.php filen. Följ nedan stående punkter:
 
 1. Skapa en mapp i site/themes med namn på temat som ska skapas.
@@ -35,7 +38,7 @@ Att bygga en egen anpassad webbplats utifrån ramverket gör lättas genom att s
         'guestbook' => array('label' => 'Guestbook', 'url' => 'mysite/guestbook'),
     ),
 
-##Att skapa en blog, en sida.
+###Att skapa en blog, en sida.
 Görs enklast genom att skapa en mapp med kontroller med tillhörande templet fil under site/src. Följ nedanstående punkter:
 
 1. Skapa en mapp i site/src med namn på den kontroller du vill skapa namnet ska börja med CC. Det kan vara t.ex CCMysite.
