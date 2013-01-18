@@ -2,7 +2,7 @@
 
 /**
  * Admin Control Panel to manage admin stuff.
- * 
+ * @package KonturCore
  * @package KonturCore
  */
 class CCAdminControlPanel extends CObject implements IController {

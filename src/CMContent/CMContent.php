@@ -1,7 +1,7 @@
 <?php
 /**
  * Description of CMContent,php
- *
+ * @package KonturCore
  * @author gustav
  */
 class CMContent extends CObject implements CHasSQL, ArrayAccess, IModule {

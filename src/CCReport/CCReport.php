@@ -22,6 +22,103 @@ class CCReport implements IController {
                         <h1>Redovisning</h1>
                       
                     </header>
+                    
+                    <section>
+    <h2>Projektdokumentation och Referensinstallation</h2>
+    <h3>Länkar</h3>
+    <p>
+        Ramverket på GitHub: <a href="https://github.com/prallin/testKontur">https://github.com/prallin/testKontur</a><br />
+        ApiGen  dokumentation: <a href="http://www.student.bth.se/~guse12/kontur/DocKontur/apigenDoc/">http://www.student.bth.se/~guse12/kontur/DocKontur/apigenDoc/</a><br /><br />
+        Referensinstallation: <a href="http://www.student.bth.se/~guse12/kontur/07/">http://www.student.bth.se/~guse12/kontur/07/</a><br />
+        
+    </p>
+    <p>Referensinstallationen går att logg in som olika användare.<br />
+        <b>Administratör</b><br />
+        Namn: root<br />
+        Lösenord: root<br />
+        <b>Användare</b><br />
+        Namn: doe<br />
+        Lösenord: doe<br />
+    </p>
+</section>
+
+
+<section>
+    <h3>Krav k1: Installera från GitHub</h3>
+    <p>Informationen om hur installera från GitHub fins i REDME filen på github: <a href="https://github.com/prallin/testKontur/blob/master/README.md">https://github.com/prallin/testKontur/blob/master/README.md</a></p>
+    <p>I den här uppgiften så har det svåraste varit att bedöma hur utförlig beskrivningen ska vara. Jag hoppas att den ska vara nog utförlig så att det fungerar att installera men för detaljerad så att det blir fånigt. Har själv testat att följa beskrivningen och lyckats. När jag har testat så har jag arbetat mot min lokala server för att senare ftp:a materialet till student servaren och den publika test installationen. Här hade det givetvis gått att logga in (ssh) på servaren och clonat  direkt till den. Ftp delen har jag inte tagit upp i REDME beskrivningen av installations förfarandet.</p>
+    <p>Min lärprocess  och arbetet med GitHub har jag beskrivit under stycket <a href="#github">Moment:Kmom07: Färdigställ och produktifiera ramverket: Git och Github.</a></p>
+</section>
+
+<section>
+    <h3>Krav k2: Den berömda 5-minuters installationen (optionellt)</h3>
+    <p>Jag har inte hunnit att implementerar lösningen på uppgiften men bifogar min skiss. 
+Skiss på en tänkbar lösning av "Den berömda 5-minuters installationen"</p>
+    <ol>
+        <li> Kolla server förutsättningar med: phpversion()</li>
+        <li> Ändra rättigheter på mappar och filer med chmod kommando från php: chmod()</li>
+        <li> Skriva ändringar i .htaccess filerna från php: fwrite()</li>
+        <li> Formulär för att ändra webbplatsens: logo, titel, footer. Skriva inmatningen i separat config fil.</li>
+    </ol>	
+</section>
+
+<section>
+    <h3>Krav k3: Ett anpassningsbart ramverk</h3>
+    <p>Informationen om hur anpassning av ramverket fins på  GitHub i REDME filen: <a href="https://github.com/prallin/testKontur/blob/master/README.md">https://github.com/prallin/testKontur/blob/master/README.md</a></p>
+    <p>Standardtema är "boot" för Konturi är baserat på Lydias men skiljer sig på att den använder sig av bootstrap och därigenom skiljer sig t.ex  fonter, färger och formulär.<br />
+Att bygga en egen anpassad webbplats utifrån ramverket gör lättas genom att skapa ett "childe" themes i site mappen och genom att göra ändringar i site/config.php filen. Har beskrivit punkterna för att göra det i README filen på github.
+</p>
+<p>Jag tolkade frågan om anpassningsbart till att handla om att skapa ett "Childe" tema inom ramverket. För att det ger utvecklaren större frihet att anpassa webbplatsen. Det ger en lite mer komplex beskrivning än att bara ändra några rader i config filen och jag hoppas att den går att följa.</p>
+</section>
+
+<section>
+    <h3>Krav k4: Ett administrativt gränssnitt (optionellt)</h3>
+    <p>För att testa på test installationen så går det att logga in som administratör med namnet: root och lösen ordet: root <br />
+        ACP på Referensinstallation: <a href="http://www.student.bth.se/~guse12/kontur/07/acp">http://www.student.bth.se/~guse12/kontur/07/acp</a></p>
+Det går att:
+<ol>
+    <li> Lägga till, uppdatera och ta bort användare </li>
+    <li> Lägga till, uppdatera och ta bort grupper. </li>
+    <li> Att koppla användare till en eller flera grupper.</li>
+    <li> Styra vem som kan se ett visst innehåll (sida eller blogginlägg), alla eller bara medlemmar av en viss grupp.</li>
+    <li> koppla content till grupper </li>
+</ol>
+<h4>Administration av användare:</h4>
+<p>Sköts av controllern CCAdminControlPanel med tillhörande templets filer. Förutom att skapa ny användare som åter använder CCUser. Har valt att spärra så att det inte går att ändra eller ta bort användarna:  root eller doe.</p>
+<h4>Administration av grupper:</h4>
+<p>Har valt att spärra så att det inte går att ändra eller ta bort grupperna:  admin, user. 
+Om man ändrar den aktuella (in loggade) användaren så behövs det loggas ut och in igen för att de nya grupptillhörigheterna ska börja gälla.</p>
+<h4>Innehåll:</h4>
+<p>Vid editering av varje innehåll så går det att lägga till, ta bort grupptillhörighet. Det kontrolleras i CCContent och utförs i CMContent. CCPage och CCBlog använder  CMContent  för att kontrollera grupptillhörighet. Det hade varit snyggare i koden in en egen CMGroupps. </p>
+<h4>Förbättringar:</h4>
+<p>Det skulle vara snyggare att det som har med grupp hantering från CMUser och CMContent flyttatas till en egen metod tex. CMGroupps för att hanterar grupperna.
+Säkerhets problem: Det går att se sidan acp utan att vara inloggad genom att gå till den url:en.  Grupptillhörigheten borde alltså även kontrolleras för varje modul och inte bara för innehåll.</p>
+<h4>Svårigheter:</h4>
+<p>Under arbetet med att ta fram databas kommandona så var terminalen väldigt bra för att testa sql satserna. På de sättet kunna se om det var i kommandona eller i php som eventuella fel hade smugit sig in.
+Jag hård kodad användar id vid installation så att allt innehåll skapad vid installation har administratörens id. 
+Det ändrade jag för att vid installation fins det ingen användaren inloggad. 
+Vid implementation av visa blog sidan och ta hänsyn till grupptillhörigheter så stötte jag på problem med de postningar som ska vissas för den som inte är inloggad. Efter många och långa försök med att söka ut postningar som inte var märkta med någon grupp. Valde jag en lösningen att i funktionen CMContent::checkGroup()
+söka ut de postningarna som hör till grupp två en grupp som jag döpte till "The Public User Group" för de besökare som inte är inloggade.
+Därför valde jag att låsa grupperna och användarna 1 och 2 så de inte går att ta bort eller ändra. </p>
+</section>
+
+<section>
+    <h2>Slutsats och reflektion:</h2>
+    <h3>Sammanfattar tankarna om mitt ramverk.</h3>
+    <p>ill stora följer Kontur Lydia de extra features är modulen CCSource som visar källkoden för ramverket den är baserad på den är i sin tur baserad på ett php script från Mikael Roos En annan extra sak är mitt grund temat "boot" som är baserat på bootstrap. Det går även att ärva "boot" temat för att skapa egna teman i från för att göra mindre justeringar. Det fins en del att göra för att använda bootstrap mer framför allt att genom att modifiera tpl filerna som nu genom child theme går att göra på ett mycket enklare sätt.</p>
+    <p>Fördelarna med att använda bootstrap för att bygga grund temat är att det på ett enkelt sätt går att skapa en fin layout och får med många extra finesser. Det ger också möjlighet att följa med i uppdateringar som görs. Så klart är nackdelen mindre kontroll och en låsning vid en speciell still. </p>
+    <p>Här ska jag också nämna det administrativt gränssnittet från krav k4. Möjligheten att hantera rättigheter i systemet och att själv ha kontrollen kan ge en större säkerhet. Nackdelen är  att det som det ser ut fins sätt att ta </p>
+    <p>Säkerhet och grupptillhörighet borde vara mer knutet till kärnan i systemet så att kontrollen av grupptillhörighet kontrolleras för url, modul, innehåll osv.. Här är det intressant att titta på ramverk som har autentisering. Har inte hittat något om det med codeigniter men tror att phpCake har det.</p>
+    <h3>Kvaliteten och framtiden för kontur ramverket </h3>
+    <p>Efter som mitt ramverk följer lydia till mycket så är kvaliteten bra och det skulle gå att använda till mindre webbprojekt. Då skulle det vara möjligt att kontrollera de fel som kan uppstå framförallt med säkerhet. Det går att bygga vidare på kontur och för en liten webbplats skulle det fungera. Men framförallt som ett sätt att testa idéer. Jag blev väldigt förtjust i Codeigniter under kursen men har även läst lite om phpCake, Yii  och blivit är sugen på att testa dessa. Tänker mig också att det kan vara mycket bra att använda ett ramverk som andra arbetar med och utvecklar och då även har ett aktivt forum.</p>
+    <h3>Analys av vad kursen har omfattat</h3>
+    <p>Tycker att jag genom kursen har fått kunskap som gör att jag lättare och snabbare kan lära mig de olika MVC-ramverk som fins.  Det har get mig en fördjupning i php med mer objektorienterat förhållning sätt. Framförallt en förståelse av hur Model View Controller är uppdelad och vilka funktioner de har. Har skapar mitt egna mvc även om den följer kurs materialets ramverk Lydia till mycket så har det varit mycket lärorikt att arbeta igenom koden så noggrant  och det har funnits möjlighet att skapa egen kunskap. Vikten av dokumentation har blivit tydlig framförallt i processen att lära mig andra ramverk. Då har även tutorials och en levande community runt ramverket varit viktig. Det har även varit en nytt och lärorikt med git och github för förståelsen och möjligheten att arbeta med projekt och kod.</p>
+</section>
+
+
+<section><br /><h1>Kurs moment</h1><br/></section>
+
+
                     <section>
                     	<h2>Moment: Kmom01: En boilerplate</h2>
                         <h3>Utvecklingsmiljö</h3>
@@ -183,8 +280,10 @@ Här var det lite problem när jag gjorde min commit så följde bara meddelande
                         <h3>Dokumentation</h3>
                         <p>Förutom den dokumentation som ramverket själv genererar genom funktionerna i  lydia tutorialn  så fins en <a href="http://www.student.bth.se/~guse12/kontur/06/apigenDoc/">dokumentation genererad via apigen.</a>  Genom NetBeans så hittade jag <a href="http://apigen.org/"> apigen </a>som jag använde för att lära mig att generera PHPDoc till kontur. Försökte installera apigen med med pear men efter som jag använder XAMPP för mac  så gick det inte så smärtfritt som jag först tänkte utan det slutade med att jag laddade hem en fristående version med alla lib filer.</p>
                         </section>
-                     <section>                   
+                     <section>
+                     <a id="github"></a>
                         <h3>Git och Github</h3>
+                        
                         <p>En fin start på att lära sig git var: <a href="http://try.github.com">http://try.github.com</a> Även om det har gått fint (nästan) under kursen  med att uppdatera via terminalen så testade NetBeans för att den har en  inbyggda hanteringen av git.  NetBeans var en väldigt smärt fritt sätt att använda git och github. Förutom att jag hade lite problem med att få taggarna att hamna rätt. För mig har github varit en ny och väldigt bra sak att lära mig. Det har också betytt att jag är mindre rädd för att skriva fel eller testa nya saker i ett projekt för det fins hela tiden en historia att gå tillbaka till. Det har även betytt att jag lästa mycket kod från andra projekt. kontur på github tag v8 :<a href=" https://github.com/prallin/testKontur/tree/v8">https://github.com/prallin/testKontur/tree/v8</a></p></section>
                      <section>                   
                         <h3>Summering av Kontur mitt ramverk </h3>
