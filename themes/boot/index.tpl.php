@@ -65,8 +65,7 @@
         <div class="row-fluid well">
             <div class="span10 offset1"><?= $footer ?></div>
         </div>
-        <?=get_tools()?>
-        <?= get_debug() ?>
+        <?=get_debug() ?>
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script src='<?= $javascript ?>bootstrap.js'></script>

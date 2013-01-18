@@ -19,11 +19,11 @@ ini_set('display_errors', 1);
 /**
  * Set what to show as debug or developer information in the get_debug() theme helper.
  */
-$kontur->config['debug']['kontur'] = false;
+$kontur->config['debug']['kontur'] = FALSE;
 $kontur->config['debug']['session'] = false;
-$kontur->config['debug']['timer'] = true;
-$kontur->config['debug']['db-num-queries'] = true;
-$kontur->config['debug']['db-queries'] = true;
+$kontur->config['debug']['timer'] = TRUE;
+$kontur->config['debug']['db-num-queries'] = TRUE;
+$kontur->config['debug']['db-queries'] = TRUE;
 /*
  * Define session name
  */
